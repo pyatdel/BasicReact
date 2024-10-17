@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 함수 function 중요
+// 반복되는 걸 안하려고, DRY원칙 : Do not Repeat Yourself
+// KISS 원칙 : Keep It Simple, Stupid, 바보야 심플하게 만들어
+
+// 정석 선언법
+let myName="윤정";
+function fYJ(){
+
+    if(myName=="운정"){
+        return `만세 ${myName}`;
+    }
+    // 여기에 굳이 else가 필요 없어진다.
+    return `${myName} 누구야`;
+
+    // return "지누자?"; // 안써도 이게 생략되어 있음, 함수 종료의 의미
+    // alert("메롱"); // 실행될 수 없음, 이미 위에서 종료되었음
+}
+alert(fYJ()); // ??
+
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// this ? 이건 나
+
+// 전역 변수를 선언하는 건 window객체에 속성을 추가하는 것과 같다
+// var myName="육수민" // let과 const는 나중에 추가되어서 이렇게 안됨, context가 완전 다름
+// alert(window.myName + "님 만만세"); // 체크
+
+// window.merong = "수민 메롱"; // 전역변수 선언을 이렇게 해도 된다.
+// alert(merong);
+
+// 전역 함수를 선언한 것은 window 객체의 메소드를 선언한 것과 같음
+function fCk(){
+    console.log("육수민 체크", this); // ? window(브라우저 최상위 객체)
+}
+
+/*
+window.fCk=function(){
+    console.log("육수민 메롱", this);
+}
+
+window.fCk();
+*/
+
+const sumin = {
+    name:"육수민"
+}
+sumin.insa = fCk;   //  
+sumin.insa;         //  this => sumin 이해는 되지만, 못 쓰겠다    
+
+</script>

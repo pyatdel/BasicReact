@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E7E MERONG</title>
+    <style>
+        #wrapper {
+            margin:10px auto;
+            text-align: center;
+        }
+        #merong {
+            position: relative;
+            margin: 0 auto;
+            width:400px;
+            height:500px;
+            border:2px solid red;
+            background-image: url("https://img.marieclairekorea.com/2020/02/mck_5e56e0d39411b.jpg");
+            background-size: 100% 100%;
+        }
+        #ball {
+            background-image: url("https://img.hankyung.com/photo/202001/03.21612581.1.jpg");
+            background-size: 100px 100px;
+            position:absolute;
+            width:100px;
+            height:100px;
+            border: 1px solid yellow;
+            border-radius: 50%;
+            background-color: blue;
+        }
+        #bar {
+            position: absolute;
+            width:150px;
+            height:30px;
+            top:440px;
+            background-color: brown;
+            color: yellow;
+            font-weight: bolder;
+        }
+        #marker {
+            position: absolute;
+            width:5px;
+            height:5px;
+            background-color: red;
+        }
+        span {
+            font-size: 1.5em;
+        }
+        input[type=checkbox] {
+            transform: scale(1.8);
+        }
+        h1 {
+            background-color: black;
+            color:yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <h1>좌우화살표사용하삼</h1>
+    <div id="merong" tabindex=0 autofocus onkeydown="fKeyControl()">
+        <div id="marker"></div>
+        <div id="ball"></div>
+        <div id="bar">&copy;E7E MERONG</div>
+    </div>
+    <input type=checkbox value="auto" onclick="fAuto(this)">&nbsp;<span>AUTO</span><br>
+    <h1>화살표안먹으면,마우스로 볼 있는 공간 한번 찍고 하삼</h1>
+</div>
+<script>
+    // 자동모드 설정
+    let v_autoMode = false;
+    function fAuto(pThis){
+        if(pThis.checked) v_autoMode = true;
+        else v_autoMode = false;
+    }
+
+    // DOM
+    const v_merong = document.querySelector("#merong");
+    const v_marker = document.querySelector("#marker");
+    const v_ball = document.querySelector("#ball");
+    const v_bar = document.querySelector("#bar");
+
+    // 움직이는 속도
+    let v_mvX = 10;  // 좌우방향
+    let v_mvH = 10;  // 상하방향
+    // 회전각
+    let v_gak = 0;
+    const ballSize = 100;
+    const merongWidth = 400;
+    const merongHeight = 500;
+
+    // 볼 움직이기
+    function fMvBall(){
+        v_gak = (v_gak + 10) % 360; 
+        v_ball.style.left = parseInt(v_ball.style.left) + v_mvX + "px";
+        v_ball.style.top = parseInt(v_ball.style.top) + v_mvH + "px";
+        v_ball.style.transform = `rotate(${v_gak}deg)`;
+
+        var v_ballLeft = parseInt(v_ball.style.left);
+        var v_ballRight = v_ballLeft + ballSize;
+        var v_ballTop = parseInt(v_ball.style.top);
+        var v_ballBottom = v_ballTop + ballSize;
+        var v_barLeft = parseInt(v_bar.style.left);
+        var v_barRight = v_barLeft + 150;  // 150은 오른쪽벽에 딱 떨어지게 준 값
+
+        //  bar왼쪽좌표 + 75 = ball왼쪽좌표 + 50 성립해야 중심이 같이 움직임
+        if(v_autoMode){
+            var v_checkOver= parseInt(v_ball.style.left)-25;
+            if(v_checkOver>250){
+                v_bar.style.left = "250px";
+            } else if(v_checkOver<0){
+                v_bar.style.left = "0px";
+            } else {
+                v_bar.style.left = v_checkOver + "px";
+            }
+        }
+        
+        // 좌우 충돌
+        if(v_ballLeft <= 0 || v_ballRight>= merongWidth){            
+            v_mvX = -v_mvX;
+        }
+        // 상하 충돌
+        if(v_ballTop <= 0 || v_ballBottom >= merongHeight){
+            v_mvH = -v_mvH;
+        }
+
+        // 아래 와 오른쪽 리미트 체킁
+        var v_botLimit = (v_ballBottom >= v_barTop); 
+        var v_lRLimit =  ((v_ballRight >= v_barLeft) && (v_ballLeft <= v_barRight));
+        // 마커표시, 회전을 해도 left,top 좌표는 바뀌지 않음이 확인가능
+        v_marker.style.left = v_ballLeft + "px";
+        v_marker.style.top = v_ballTop + "px";
+
+        // 막대와 공 충돌시 skew 효과
+        if(v_botLimit && v_lRLimit){
+            //alert("충돌!!!");
+            if(v_mvX > 0){
+                v_ball.style.transform = "skewX(-45deg)";
+            }else {
+                v_ball.style.transform = "skewX(45deg)";
+            }
+            v_mvH = -v_mvH;  // 방향전환
+        }     
+        setTimeout(fMvBall,100);
+    }
+
+    // 화살표 좌우 키 컨트롤
+    function fKeyControl(){
+        var v_keyCode = event.keyCode;
+        var v_barLeft = parseInt(v_bar.style.left);
+        var v_barRight = v_barLeft + 150;
+        if(v_keyCode==37){   // 왼쪽 화살표
+            if(v_barLeft>0){
+                v_bar.style.left = v_barLeft -10 + "px"; 
+            }
+        }
+        if(v_keyCode==39){  // 오른쪽 화살표
+            if(v_barRight < merongWidth){
+                v_bar.style.left = v_barLeft +10 + "px"; 
+            }
+        }
+    }
+
+    // 페이지 로딩후 초기값 세팅 후 볼 움직임 콜!
+    let v_barTop;
+    window.onload = function(){
+        v_bar.style.left = Math.floor(Math.random()*25)*10 + "px";
+        v_bar.style.top = "450px";                                  // 막대 위치
+        v_ball.style.left = Math.floor(Math.random()*30)*10 + "px"; // left는 랜덤
+        v_ball.style.top = "10px";                                  // top은 고정
+        v_barTop = parseInt(v_bar.style.top);
+        fMvBall();                                     // 움직이기 시작
+    }
+</script>
+</body>
+</html>

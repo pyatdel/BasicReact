@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<input type="text" id="ckTxt" value="뭐어얼봐">
+<script>
+    var chtest = document.querySelector("#ckTxt").value;
+    alert(typeeof(cktest)); // string은 원시타입
+    cktest="뭐어얼봐2";
+
+    var cktest2 = document.querySelector("#ckTxt");
+    cktest2.value="뭐어얼봐3";
+
+    // 꼭 절대 필히 무슨 일이 있어도 알아야 함
+    // 원시타입(Primitive)과 객체(Object) 타입을 구분할 줄 알아야 함
+    // 원시타입은 속성도 메소드도 없는 것, 아니라면 객체 타입
+    // number, string, boolean // 나머지는 무시 null, undefinde, NaN
+    // 원시타입 값을 할당시 복사가 된다
+
+    var jinchan = {
+        name:"진찬",
+        age:20,
+        etc:"이름 이상해"
+    }
+    
+    // = 오른쪽이 원시 타입이면 복사, 아니면 곧 객체 타입이면 참조(별명)가 이루어짐
+    var merong = jinchan; // 복사가 아니고 참조가 이루어짐
+    merong.etc="뭐가 이상해";
+
+    alert(jinchan.etc); //??
+
+    
+    /*var aaa = 337;
+    alert(typeof(aaa)); // number
+    var bbb = aaa;      // 복사가 이루어짐!
+    bbb = 442;
+    alert(aaa); */
+
+
+</script>

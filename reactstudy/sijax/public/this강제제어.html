@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <h1>알 지영</h1>
+    <!-- 사용자 정의 속성 data- -->
+    <button id="ysmBtn" data-friend-name="광재" data-age="200">육수민 버튼</button>
+</body>
+<script>
+const ysmBtn = document.querySelector("#ysmBtn");
+
+function fSumin(pName){
+    // alert(`${pName}은 내친구`);
+    alert(event.target.dataset.friendName);
+    alert(event.target.dataset.age);
+    alert(event.target.dataset["age"]); // 위랑 같은 의미
+}
+
+// bind는 call과 문법이 완전히 똑같음
+// 단지 동작이 다른데, call은 바로 실행되고, bind는 내부적으로 함수를
+// 만들고, 그 함수의 포인터(함수이름이라 생각해도 됨)를 되돌려 줌
+// ysmBtn.addEventListener("click", fSumin.bind({name:"수민"},"윤정")); // 올바른가?
+ysmBtn.addEventListener("click", fSumin); 
+
+
+// this 제어 힘드셨죠, 이제 당신 맘대로 세팅하세요
+// call, apply, bind(잘쓰면 고참이 피해) 3가지 function 객체 메소드 제공
+
+function fCk(pArg1, pArg2){
+    console.log("수민 체크", this);
+    console.log("수민2 체크",pArg1, pArg2);
+}
+
+// fCk(); // this => window,   window.fCk()
+// fCk.call({name:"진우",special:"눈뜨고 자기"}, "육", "수민");
+// fCk.apply(document.body, ["육", "수민"]);
+
+</script>

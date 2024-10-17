@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<body>
+</body>
+<script>
+    // 고참 짜증나게 alert 덮어쓰기 (실제로 하면 안됨)
+    const alert = Swal.fire.bind(Swal);
+
+    alert("수민이 잘하고 있음!");
+
+
+    /* 나쁘진 않음
+    function jcPrt(pStr){
+        document.write(pStr);
+    }
+    jcPrt("<h1>난 최고의 프로그래머다</h1>");
+    jcPrt("<h2>난 최고의 프로그래머다</h2>");
+    jcPrt("<h3>난 최고의 프로그래머다</h3>");
+    */
+
+    const jcPrt2 = document.write.bind(document); // 문법 문제? 없음. 참조 방식 // this를 강제로 document로
+    jcPrt2("<h1>최고의 프로그래머</h1>"); // 불법 호출
+    jcPrt2("<h1>bind 최고의 프로그래머</h1>"); // 불법 호출
+</script>

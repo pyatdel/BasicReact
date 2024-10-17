@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 2015년 말 이전 스크립트 버젼 ES5, ES6 발표   EcmaScript
+    // ES6 기능들이 그동안 잘 못 쓰이고 있었음, IE11 때문에
+    // caniuse.com에서 확인!
+
+    // 보통 필수가 아닌 옵션(선택사항) 변수들을 전개연산자 처리함
+    function fCk(pName="너 사장님", pAge=100,...pOption){
+        console.log("체크",pName);
+        console.log("체크",pAge);
+        console.log("체크",pOption);
+    }
+
+    fCk(undefined,undefined,"열심","안열심");
+    fCk("지누",27,"열심","안열심");
+
+    // 머야 별거 아니네, 구조분해(Destructuring)와 같이 엄청나게 많이 쓰임
+</script>

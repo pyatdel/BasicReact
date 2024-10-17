@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    var merong = "이건 어때?"; // 이건 공유
+</script>
+<script type="module">
+
+import KGB, {Sohyun, Sumin} from "./myModule.js"
+import {Sohyun as pie} from "./yourModule.js"
+
+KGB(); // Sungun()과 같음
+// Sumin();
+
+var merong = "메롱"; // 이건 공유 안됨
+// Sohyun();
+// pie();
+
+
+</script>
+<script type="module">
+// alert("체크"+merong); // ??
+</script>

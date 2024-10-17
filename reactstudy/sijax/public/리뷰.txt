@@ -1,0 +1,26 @@
+react       자바스크립트 UI 라이브러리(프레임워크)
+node        자바스크립트 런타임 환경 JRE
+nvm         Node Version Manager (여러버젼 node)
+vpm         Node Package Manager (프로젝트 정보랑, 모듈관리)
+npx         Node Package eXcuecutor (설치없이 그냥 한번씩 실행)
+
+원시타입(복사)/객체타입(참조)   => 절대 기억!
+Wrapper (불편한 걸 편리하게 바꿔주는 애) => string => string
+원시타입에 .을 찍으면 Wrapper 적용
+
+json []식 속성 접근법, 모르면 프로그램이 이상해질 수 있음
+for ,in 객체 정도 알아두면 좋음 
+함수 return -> 생략되어 있고, 함수의 종료를 의미
+    매개변수와 리턴 타입에는 제약사항이 없다
+    ==> 콜백함수(조금 에너지와 시선을 좀 더 줘서)
+
+JSX(컴포넌트)     babel.js 
+react plugin    rfce rafce // 스니펫(마우스 우클릭)
+
+layout
+css position => 부모 relative 자식 absolute
+transform
+z-inex
+숙제    경우의 수를 생각!!!
+
+React Props, JSX 태그 안 속성들 전체 받아오는 객체

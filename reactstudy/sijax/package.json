@@ -1,0 +1,21 @@
+{
+  "name": "sijax",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type":"module",
+  
+  
+  "scripts": {
+    "start" : "node mywebserver.js",
+    "jinchan":"echo 진찬",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.1",
+    "serve-index": "^1.9.1"
+  }
+}

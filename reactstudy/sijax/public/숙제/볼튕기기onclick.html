@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #wrapper {
+        position:relative;
+        width:800px;
+        height:700px;
+        border:10px groove gold;
+
+    }
+    #ball{
+        background-image: url(https://humanities.hanyang.ac.kr/front/department/humanity/college/introduce/file-load?id=97&fileId=821&mw=1000);
+        background-size:100% 100%;
+        position:absolute;
+        width:60px;
+        height:60px;
+        border:1px solid silver;
+        border-radius: 50%;
+        left:30px; top:100px;
+        /* transform: rotateY(45deg); /* deg는 degree */
+        /* transform: skewX(45deg); /* deg는 degree */
+
+    }
+    #bar {
+        position: absolute;
+        width:200px;
+        height:30px;
+        background-color: cadetblue;
+        left: 30px;
+        bottom: 60px;
+    }
+</style>
+</head>
+<body>
+    <button onclick="fStart()">시작</button>
+    <button onclick="fStop()">멈춤</button>
+    <!-- focus 받을 수 없는 건 keyboard이벤트  안됨. 해결은 tabindex=0-->
+    <div id="wrapper" tabindex="0" onkeydown="fKeyDown()">
+        <div id="ball"></div>
+        <div id="bar"></div>
+        
+    </div>
+<script>
+    // 전역변수
+    const wrapper = document.querySelector("#wrapper");
+    const ball = document.querySelector("#ball");
+    const bar = document.querySelector("#bar");
+    
+    
+    let timerId=null;
+
+    function fStop(){
+        clearTimeout(timerId);
+        isRunning = !1; // 상태값을 시작버튼 누르기 이전으로
+    }
+
+    // 직접 fMove를 부르지 않고 거쳐서 감, (Proxy대리인 패턴)
+    let isRunning = !1;
+    function fStart(){
+        if(!isRunning){
+            fMove();
+            isRunning = !0; // true
+        }
+    }
+
+    function fKeyDown(){
+        // alert(event.key); // 사람 맘이 이게 좋은데 없어보여서 잘 안씀
+        // alert(event.keyCode);
+        if(event.keyCode == 37){
+            if(parseInt(bar.style.left) >= 10){
+            bar.style.left = parseInt(bar.style.left)-10+"px";
+            bar.style.left.replace("px","");
+            console.log(parseInt(bar.style.left));
+
+        }
+    }
+
+
+        if(event.keyCode == 39){
+            if(parseInt(bar.style.left) <=590 ){ 
+            bar.style.left = parseInt(bar.style.left)+10+"px";
+            console.log(bar.style.left);
+
+        }
+    }
+}
+
+    if(!ball.style.left){ // script를 이용한 초기화
+        ball.style.left = "40px";
+        ball.style.top="200px";
+        bar.style.left="30px";
+    }
+
+    // alert(ball.style.left + 50);
+    // DOM element의 style은 inline-style만 읽어올 수 있음
+    // ball.style.left = parseInt(ball.style.left) + 50 + "px"; // 움직일까요?
+    
+    let xSpeed = 10;
+    let ySpeed = 10;
+    let gakdo = 0;
+
+    function fMove(){
+        gakdo = gakdo + 10;
+        
+        ball.style.left = parseInt(ball.style.left) + xSpeed + "px";
+        ball.style.top = parseInt(ball.style.top) + ySpeed + "px";
+
+        ball.style.transform = `rotate(${gakdo}deg)`;
+        // 오른쪽 벽 충돌
+        let ballLeft = parseInt(ball.style.left);
+        if(( (ballLeft+60) >= 800 ) || (ballLeft <= 0) ){
+            // 여기서 방향 전환
+            xSpeed = -xSpeed; // 보통 이 표현이 머릿속을 번쩍하게 함
+            ball.style.transform = `skewY(45deg)`;
+        }
+        
+
+        let ballTop = parseInt(ball.style.top);
+        if(( (ballTop+60) >= 700 ) || (ballTop <= 0) ){
+            // 여기서 방향 전환
+            ySpeed = -ySpeed; // 보통 이 표현이 머릿속을 번쩍하게 함
+            ball.style.transform = `skewY(45deg)`;
+        }
+        bar.style.left.replace("px","");
+        if((parseInt(ball.style.left) <=parseInt(bar.style.left) || parseInt(ball.style.left) <=parseInt(bar.style.left+200))&&parseInt(ball.style.top) == 510){
+            ySpeed = -ySpeed;
+        }
+
+        // setTimeout의 리턴값은 스탑왓치를 가리키는 id를 리턴
+        timerId = setTimeout(fMove,100);
+    }
+    // fMove();
+
+</script>
+</body>
+</html>
