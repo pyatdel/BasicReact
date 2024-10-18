@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>윤정만세</h1>
+    <input type="text" id="suminTxt" value="">
+    <button onclick="fSch()">이미지검색</button>
+<div id="suminDisp"></div>
+<script>
+    const suminDisp = document.querySelector("#suminDisp");
+    const suminTxt = document.querySelector("#suminTxt");
+    const preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags="
+    const postURL = "&format=json";
+
+    /*
+        숙제 텍스트박스에서 엔터키 쳤을 때
+        검색 버튼 누른 것처럼 동작하기
+    */
+
+
+    function fSch(){
+        let schURL = `${preURL}${suminTxt.value}${postURL}`;
+        // script 태그 생성
+        let nScriptTag = document.createElement("script");
+        nScriptTag.src=schURL;
+        document.head.appendChild(nScriptTag);
+    } 
+
+    // 플리커가 함수호출에 매개변수로 필요한 값을 줌 => 햄버거패드 => JSONP
+    function jsonFlickrFeed(yj){
+        console.log("체크",yj)
+        suminDisp.innerHTML = ""; // 이 부분 다시보기
+        let revArr = yj.items;
+        for(let i=0; i<revArr.length; i++){
+            let item = revArr[i];
+            let imgURL = item.media.m;
+
+            // img 태그로 image를 화면에 뿌릴 수 있음
+            let imgTag = document.createElement("img"); // $("<img>")
+            imgTag.src = imgURL; // <img src="url">
+            // 화면에 붙이기, 화면에 있는 애에게 붙여야 눈에 보임
+            suminDisp.appendChild(imgTag);
+        }
+
+    }
+</script>
+    <script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=dog&format=json"></script>
+</body>
+</html>

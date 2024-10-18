@@ -11,7 +11,7 @@
 const disp = document.querySelector("#disp");
 
     // 전역함수
-    function fOver(pTR){ // TR 태그 위에 마우스 
+    function fOver(pTR){ // TR 태그 위에 마우스,  마우스가 행 위를 올라갔을 때 스타일 변경
             // console.log("체크:",pTR);
             const merong = "color";
         const colValue = "pink";
@@ -19,14 +19,14 @@ const disp = document.querySelector("#disp");
             pTR.style["backgroundColor"]="black";
     }
 
-    function fOut(pTR){ // TR 태그에서 마우스 벗어남
+    function fOut(pTR){ // TR 태그에서 마우스 벗어남, 마우스가 행에서 벗어날을 때 스타일 변경
         // console.log("체크:",pTR);
         
         pTR.style.color="yellow";
         pTR.style.backgroundColor="gray";
     }
 
-    const members = [
+    const members = [ // 회원 정보를 담은 객체 배열
         {name:"승민", age:24, nickName:"잘모름", pos:"level2"},
         {name:"진우", age:29, nickName:"지누", pos:"level1"},
         {name:"진찬", age:24, nickName:"찬진", pos:"level4"},
@@ -36,7 +36,7 @@ const disp = document.querySelector("#disp");
         
         ];
 
-        const positions = {
+        const positions = { // 직책 매핑
             level1: "사장님",
             level2: "팀장님",
             level3: "넘버3",
@@ -51,7 +51,7 @@ const disp = document.querySelector("#disp");
 for(let i=0; i< members.length; i++){
     let member = members[i];
     tblStr += `
-                <tr onmouseover="fOver(this)""    onmouseout="fOut(this)">
+                <tr onmouseover="fOver(this)"    onmouseout="fOut(this)">
                     <td>${member.name}</td>
                     <td>${member.age}</td>
                     <td>${member.nickName}</td>

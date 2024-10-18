@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <script>
-    var isOk = true;
-
+    var isOk = false;
+/*
     if(isOk){
         alert("OK래요");
     }
+*/
+
 
     // 위 if 문을 && 를 이용해서 한줄로 간략하게 완성해보기
+    // isOk && alert("윤정 만세");
+
+
+    var migang = isOk?"완전이쁨":"더이쁨";
+    // alert(`미강 ${migang}`);
+
+    var isCheck = null;
+
+    let merong = isCheck??"뭘봐"; // isCheck가 null이나 undefined이면 ?? 다음이 실행됨
+    // alert(merong);
+
+    // Optional Chaining
+    let suminArr; // = ["지영","완희","정민","원근"];
+
+    suminArr?.forEach(name=>{
+            alert(name);
+        })
+
 </script>

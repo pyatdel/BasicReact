@@ -24,3 +24,9 @@ z-inex
 숙제    경우의 수를 생각!!!
 
 React Props, JSX 태그 안 속성들 전체 받아오는 객체
+
+prototype => 메소드 공유
+function 키워드를 class의 의미
+전개연산자 -> spread operator ...., 객체 복사
+구조분해 -> 값 뽑아내기 쉬워짐
+콜백함수 눈이 따라가도록 연습
