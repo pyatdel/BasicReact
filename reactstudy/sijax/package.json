@@ -2,12 +2,10 @@
   "name": "sijax",
   "version": "1.0.0",
   "main": "index.js",
-  "type":"module",
-  
-  
+  "type": "module",
   "scripts": {
-    "start" : "node mywebserver.js",
-    "jinchan":"echo 진찬",
+    "start": "node mywebserver.js",
+    "jinchan": "echo 진찬",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +15,8 @@
   "dependencies": {
     "express": "^4.21.1",
     "serve-index": "^1.9.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.3"
   }
 }
