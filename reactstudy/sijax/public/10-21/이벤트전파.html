@@ -1,69 +1,76 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<style>
-    #yj{
-        width: 300px;
-        height: 300px;
-        border:30px groove black;
-    }
-
-    #jm{
-        position: relative;
-        left: 20px;
-        width: 200px;
-        height: 200px;
-        border:20px groove blue;
-    }
-
-    #mg{
-        position: relative;
-        left: 20px;
-        width: 100px;
-        height: 100px;
-        border:10px groove pink;
-    }
-
-</style>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 전파 예제</title>
+    <style>
+        .box-outer {
+            width: 300px;
+            height: 300px;
+            border: 30px groove #333;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        
+        .box-middle {
+            width: 200px;
+            height: 200px;
+            border: 20px groove #666;
+            background-color: #eaeaea;
+            margin: 10px;
+        }
+        
+        .box-inner {
+            width: 100px;
+            height: 100px;
+            border: 10px groove #999;
+            background-color: #dcdcdc;
+            margin: 10px;
+        }
+    </style>
+</head>
 <body>
-<!-- 디버깅에 문제가 있고, 확장성도 안보이는 코드, 샘플코드로만 활용!! -->
-    <a href="javascript:location.href=`//daum.net`" >진찬이 안 좋은 코드</a><br> 
-    <a href="#" onclick="fmgClk()">진찬이 좀 굉장해</a>
-
-    <div id="yj" onclick="fYJ()">윤정
-        <div id="jm" onclick="fJM()">정민
-            <div id="mg" onclick="fMG()">미강
-            </div>
+    <div class="box-outer" id="outer">외부 박스
+        <div class="box-middle" id="middle">중간 박스
+            <div class="box-inner" id="inner">내부 박스</div>
         </div>
     </div>
+
+    <script>
+        const outer = document.getElementById('outer');
+        const middle = document.getElementById('middle');
+        const inner = document.getElementById('inner');
+
+        // 캡처링 단계
+        outer.addEventListener('click', () => {
+            console.log('1. 캡처링 단계: 외부 박스');
+        }, true);
+
+        middle.addEventListener('click', () => {
+            console.log('2. 캡처링 단계: 중간 박스');
+        }, true);
+
+        inner.addEventListener('click', () => {
+            console.log('3. 캡처링 단계: 내부 박스');
+        }, true);
+
+        // 버블링 단계
+        inner.addEventListener('click', () => {
+            console.log('4. 버블링 단계: 내부 박스');
+        });
+
+        middle.addEventListener('click', () => {
+            console.log('5. 버블링 단계: 중간 박스');
+        });
+
+        outer.addEventListener('click', () => {
+            console.log('6. 버블링 단계: 외부 박스');
+        });
+
+        // 초기 안내 메시지
+        console.log('내부 박스를 클릭하면 이벤트 전파 순서를 확인할 수 있습니다:');
+        console.log('캡처링: 외부 → 중간 → 내부');
+        console.log('버블링: 내부 → 중간 → 외부');
+    </script>
 </body>
-
-<script>
- function fmgClk(){
-    event.preventDefault(); // built-in 이벤트 막기, 꼭 기억!!!, ajax의 form 전송할 때 꼭 붙는 코드
-
-    /*    역산이 가능하므로 이런걸 보안에 쓰는 건 바보같은 행위!!!
-                과거                            최신
-    인코딩함수  escape      encodeURI       encodeURIComponent     
-    디코딩함수  unescape    decodeURI       decodeURIComponent
-*/
-    alert(decodeURIComponent(location.href));
-    location.href="//naver.com";        // atag 기능을 스크립트로!
- }
-
-// 이벤트 버블링! (아주 사생활이 없어, 이렇게는 못 살아)
-function fYJ(){
-    alert("나 윤정");
-}
-
-function fJM(){
-    event.stopPropagation(); // 이벤트 캡처링. 이벤트 전파 막기, 이걸 안하면 함수가 전부 실행된다.
-    alert("나 정민");
-}
-
-function fMG(){
-    event.stopPropagation(); // 이벤트 전파 막기, 이걸 안하면 함수가 전부 실행된다.
-    alert("나 미강");
-}
-
-
-</script>
+</html>

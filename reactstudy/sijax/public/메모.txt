@@ -1,3 +1,11 @@
+1021_____________
+역산이 가능하므로 이런걸 보안에 쓰는 건 바보같은 행위!!!
+                과거                            최신
+    인코딩함수  escape      encodeURI       encodeURIComponent     
+    디코딩함수  unescape    decodeURI       decodeURIComponent
+
+    
+
 1022______________
 직렬화는 왜하나요?
 가볍게 하려고

@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
+<style>
+    button {
+        margin: 10px;
+        padding: 5px 10px;
+    }
+    .section {
+        margin: 20px;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+</style>
 <body>
-    <!-- 인라인 이벤트 등록법, 여기에 ()는 호출 문법이 아님!!, 헷갈리지 말기 -->
-    <button onclick="fClick(this)" id="jyBtn">눌러보세요</button>
-                    특별히 넘길 값이 없을 때, this를 넣는다
-    <button id="suminBtn">다시 눌러보세요</button>  // 디자이너는 class, 개발자는 id'만' 사용하면 좋다
-    <button id="syBtn">
-        소현퍼즐 <span style="color: blue; font-size: 2em;">맞춰보기</span> // 이렇게 하면 사용하기 힘듦
-    </button>
+    <!-- 1. 인라인 이벤트 방식 -->
+    <div class="section">
+        <button onclick="handleClick(this)" id="btn1">인라인 이벤트 방식</button>
+    </div>
+
+    <!-- 2. 프로퍼티 리스너 방식 -->
+    <div class="section">
+        <button id="btn2">프로퍼티 리스너 (일반함수)</button>
+        <button id="btn3">프로퍼티 리스너 (화살표함수)</button>
+    </div>
+
+    <!-- 3. addEventListener 방식 -->
+    <div class="section">
+        <button id="btn4">addEventListener 방식</button>
+        <button id="btn5">
+            이벤트 타겟 테스트 <span style="color: blue; font-size: 2em;">★</span>
+        </button>
+    </div>
+
+    <script>
+        // 1. 인라인 이벤트 방식
+        function handleClick(element) {
+            console.log("1. 인라인 방식");
+            console.log("- element:", element);
+            console.log("- parentElement:", element.parentElement);
+            console.log("------------------------");
+        }
+
+        // 2. 프로퍼티 리스너 방식
+        const btn2 = document.querySelector("#btn2");
+        const btn3 = document.querySelector("#btn3");
+
+        // 일반 함수: this는 버튼 요소
+        btn2.onclick = function() {
+            console.log("2. 프로퍼티 방식 (일반함수)");
+            console.log("- this:", this);
+            console.log("------------------------");
+        }
+
+        // 화살표 함수: this는 window, 대신 event.target 사용
+        btn3.onclick = () => {
+            console.log("2. 프로퍼티 방식 (화살표함수)");
+            console.log("- this:", this);
+            console.log("- event.target:", event.target);
+            console.log("------------------------");
+        }
+
+        // 3. addEventListener 방식
+        const btn4 = document.querySelector("#btn4");
+        const btn5 = document.querySelector("#btn5");
+
+        // 기본적인 addEventListener 사용
+        btn4.addEventListener("click", function() {
+            console.log("3. addEventListener 방식");
+            console.log("- this:", this);
+            console.log("------------------------");
+
+            // 중첩 이벤트 리스너 (주의: 클릭할 때마다 새로운 리스너가 추가됨)
+            btn5.addEventListener("click", () => {
+                console.log("3-1. 중첩된 이벤트 리스너");
+                console.log("------------------------");
+            });
+        });
+
+        // target vs currentTarget 비교
+        btn5.addEventListener("click", (event) => {
+            console.log("4. target vs currentTarget");
+            console.log("- event.target:", event.target);  // 실제 클릭된 요소
+            console.log("- event.currentTarget:", event.currentTarget);  // 이벤트가 바인딩된 요소
+            console.log("------------------------");
+        });
+
+        // 초기 설명
+        console.log("이벤트 핸들러 등록 방식 예제");
+        console.log("1. 인라인 방식: onclick 속성 사용");
+        console.log("2. 프로퍼티 방식: element.onclick = function()");
+        console.log("3. addEventListener: 권장되는 현대적 방식");
+        console.log("------------------------");
+    </script>
 </body>
-<script>
-const syBtn = document.querySelector("#syBtn");
-syBtn.onclick = () => {
-    console.log("체크:", event.target);  // 바뀜
-    console.log("체크2:", event.currentTarget); // 안바뀜, 항상 이벤트 걸어준 애가 나온다
-}
-
-// 이벤트, 마우스, 키보드 두드리기 등등..
-
-const jyBtn = document.querySelector("#jyBtn");
-const suminBtn = document.querySelector("#suminBtn");
-
-
-// 이벤트 등록법2번
-/*suminBtn.onclick = function(){ // function(this) 는 예약어이기 때문에 안된다
-    alert("수민 버튼");
-}*/
-
-// 이벤트 등록법 2번, 오버라이딩
-/*suminBtn.onclick = function(){
-    console.log("체크:",this);
-    alert("유정 버튼");
-}*/
-
-// 이벤트 등록법 2번, 오버라이딩(화살표 함수)로 하면 window가 나오긱 때문에, this를 event.target으로 치환 
-//                                                                              event.target 이벤트를 발생시킨 아이를 가리킴
-/*suminBtn.onclick = () => {
-    console.log("체크:",event.target);
-    alert("유정 버튼");
-}*/
-
-// 이벤트 등록법 3번 / 권장 방식, 규모가 커져서 대응으로 나옴, 덮어쓰지 않고 기록되기 때문에, 같은 일을 두세번 하는 경우도 있다
-// 사용에 주의가 필요!, 안 그럼 같은 코드가 여러번 실행될 수 있음
-suminBtn.addEventListener("click", function(){
-    alert("수민 버튼");
-    jyBtn.addEventListener("click",()=>{
-        alert("지영 버튼1")
-    })
-})
-
-// 이벤트 등록법 3번 / 권장 방식, 규모가 커져서 대응으로 나옴
-suminBtn.addEventListener("click", function(){
-    alert("미강 버튼");
-    jyBtn.addEventListener("click",()=>{
-        alert("지영 버튼2")
-    })
-})
-
-
-function fClick(pBtn){
-    console.log(pBtn.parentElement); // body가 나옴
-    alert("왜왜");
-}
-</script>

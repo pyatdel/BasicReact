@@ -7,13 +7,13 @@
 
   // 보통 필수가 아닌 옵션(선택사항) 변수들을 전개연산자 처리함
   function fCk(pName="너 사장님",pAge=100,...pOption){
-     console.log("체킁1",pName);
-     console.log("체킁2",pAge);
-     console.log("체킁3",pOption);
+     console.log("체크1",pName);
+     console.log("체크2",pAge);
+     console.log("체크3",pOption);
   }
 
-  fCk(undefined,undefined,"욜씸","안욜씸");
-  fCk("지누",27,"욜씸","안욜씸");
+  fCk(undefined,undefined,"열심","안열심");
+  fCk("지누",27,"열심","안열심");
 
   // 머야 별개 아니넹, 구조분해(Destructuring) 와 같이 엄청나게 많이 쓰임!
 </script>
