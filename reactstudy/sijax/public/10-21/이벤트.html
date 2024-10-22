@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <!-- 인라인 이벤트 등록법, 여기에 ()는 호출 문법이 아님!!, 헷갈리지 말기 -->
+    <button onclick="fClick(this)" id="jyBtn">눌러보세요</button>
+                    특별히 넘길 값이 없을 때, this를 넣는다
+    <button id="suminBtn">다시 눌러보세요</button>  // 디자이너는 class, 개발자는 id'만' 사용하면 좋다
+    <button id="syBtn">
+        소현퍼즐 <span style="color: blue; font-size: 2em;">맞춰보기</span> // 이렇게 하면 사용하기 힘듦
+    </button>
+</body>
+<script>
+const syBtn = document.querySelector("#syBtn");
+syBtn.onclick = () => {
+    console.log("체크:", event.target);  // 바뀜
+    console.log("체크2:", event.currentTarget); // 안바뀜, 항상 이벤트 걸어준 애가 나온다
+}
+
+// 이벤트, 마우스, 키보드 두드리기 등등..
+
+const jyBtn = document.querySelector("#jyBtn");
+const suminBtn = document.querySelector("#suminBtn");
+
+
+// 이벤트 등록법2번
+/*suminBtn.onclick = function(){ // function(this) 는 예약어이기 때문에 안된다
+    alert("수민 버튼");
+}*/
+
+// 이벤트 등록법 2번, 오버라이딩
+/*suminBtn.onclick = function(){
+    console.log("체크:",this);
+    alert("유정 버튼");
+}*/
+
+// 이벤트 등록법 2번, 오버라이딩(화살표 함수)로 하면 window가 나오긱 때문에, this를 event.target으로 치환 
+//                                                                              event.target 이벤트를 발생시킨 아이를 가리킴
+/*suminBtn.onclick = () => {
+    console.log("체크:",event.target);
+    alert("유정 버튼");
+}*/
+
+// 이벤트 등록법 3번 / 권장 방식, 규모가 커져서 대응으로 나옴, 덮어쓰지 않고 기록되기 때문에, 같은 일을 두세번 하는 경우도 있다
+// 사용에 주의가 필요!, 안 그럼 같은 코드가 여러번 실행될 수 있음
+suminBtn.addEventListener("click", function(){
+    alert("수민 버튼");
+    jyBtn.addEventListener("click",()=>{
+        alert("지영 버튼1")
+    })
+})
+
+// 이벤트 등록법 3번 / 권장 방식, 규모가 커져서 대응으로 나옴
+suminBtn.addEventListener("click", function(){
+    alert("미강 버튼");
+    jyBtn.addEventListener("click",()=>{
+        alert("지영 버튼2")
+    })
+})
+
+
+function fClick(pBtn){
+    console.log(pBtn.parentElement); // body가 나옴
+    alert("왜왜");
+}
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 자바스크립트에서 함수는 거의 심장과 같은 부분!
+
+// 즉각 실행함수라고 함
+// 라이브러리 만들때 많이 사용, 초기화 블록
+// () 나 !를 이용하는 게 관례!
+!function(pName){
+   alert(`나 어땡? ${pName}`);
+}("유노윤호");
+
+// interpreter vs compile
+// 멋진 말로 hoisting(위로 올리깅), 선언부만, 왜?, 성능/최적화 
+
+//alert(fCk());  // alert("정식")
+//alert(sumin()); // alert("표현식")
+
+// 공식 함수 선언
+function fCk(){
+  return "정식";
+}
+
+// 표현식(expression)을 이용한 선언
+// 연산(실행)을 통해서 결과가 하나로 귀결되는 걸
+const sumin=function(){
+  return "표현식";
+}
+
+</script>

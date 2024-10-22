@@ -30,3 +30,12 @@ function 키워드를 class의 의미
 전개연산자 -> spread operator ...., 객체 복사
 구조분해 -> 값 뽑아내기 쉬워짐
 콜백함수 눈이 따라가도록 연습
+
+메소드체인 => 메소드 안에 return this
+appendChild -> append
+화살표함수 -> this를 쓸거면 그냥 function
+            매개변수 => 값
+            (매개변수) => {
+                    return 값;
+            }
+JSONP(JSON P(Padding 햄버거))

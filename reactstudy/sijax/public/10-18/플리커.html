@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>윤정만세</h1>
-    <input type="text" id="suminTxt" value="">
+    <input type="text" id="suminTxt" value="" onkeydown="fEnter()">
     <button onclick="fSch()">이미지검색</button>
 <div id="suminDisp"></div>
 <script>
@@ -18,7 +18,23 @@
     /*
         숙제 텍스트박스에서 엔터키 쳤을 때
         검색 버튼 누른 것처럼 동작하기
+
+        
     */
+
+    function fEnter(){
+        // event.key
+        if(event.keyCode == 13){
+            // alert("엔터키를 눌렀을 때만 실행");
+            if(!suminTxt.value.trim()){
+                alert("작성 안할거야?");
+                suminTxt.focus(); // 마우스 커서를 텍스트박스에
+                return; // 더 하면 (x)
+            }
+            fSch();
+        }
+       
+    }
 
 
     function fSch(){
