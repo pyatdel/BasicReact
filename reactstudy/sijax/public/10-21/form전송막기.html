@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>form전송 막기</title>
+</head>
+<body>
+   <!-- form태그는 몇번을 써도 상관없다, 단 form 태그 안에 form태그 사용안함-->
+  <!-- action은 안써주면 현재 주소표시줄 값, method-->
+    <form   onsubmit="return fSubmit()">    
+      <input type="text"  name="fname" value="소현">
+      <input type="text"  name="fname" value="순건">
+      <input type="text"  name="fname" value="유정">
+      <input type="text"  name="fname" value="수민">
+      <button type="submit">떤송</button>
+    </form>
+    <hr>
+    <form>    
+      <input type="text"  name="fname" value="순건">
+    </form>
+    <hr>
+    <form>    
+      <input type="text"  name="fname" value="원근">
+    </form>
+    <hr>
+    <form>    
+      <input type="text"  name="fname" value="수민">
+    </form>
+<script>
+    function fSubmit(){
+       if(document.forms[0].fname[0].value == "진우"){
+          return true;
+       }
+       return false;
+    }
+
+    // forms란 걸 지원해줌. 아주 오래전부터...
+    /*
+    console.log(document.forms[2].fname);
+    alert(document.forms[2].fname.value);
+    */
+</script>    
+</body>
+</html>
