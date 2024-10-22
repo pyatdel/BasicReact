@@ -39,3 +39,11 @@ appendChild -> append
                     return 값;
             }
 JSONP(JSON P(Padding 햄버거))
+______________________________________
+// reactive변수, 값이 변경되면 다시 그림(rendering)
+const [변수명, set변수명] = useState(초기값)
+// hook 이란 건 리액트에서 제공해주는 개발자 편의 함수
+// use...
+event.stopPropergation => 이벤트 전파 막기(버블링 => 캡처링)
+event.preventDefault() => built-in 이벤트 막기
+encoding %20 / decoding

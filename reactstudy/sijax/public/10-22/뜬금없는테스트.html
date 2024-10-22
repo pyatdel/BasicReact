@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h2>진찬이의 취미는 3가지를 넘지 않아요</h2>
+<hr>
+자바<input type="checkbox" jin name="jcHobby" value="java" onclick="fClick(this)">
+자바스크립트<input type="checkbox" jin name="jcHobby" value="js" onclick="fClick(this)">
+CSS<input type="checkbox" jin name="jcHobby" value="css" onclick="fClick(this)"> <br>
+스프링<input type="checkbox" jin name="jcHobby" value="spring" onclick="fClick(this)">
+HTML<input type="checkbox" jin name="jcHobby" value="html" onclick="fClick(this)">
+오라클<input type="checkbox" jin name="jcHobby" value="oracle" onclick="fClick(this)">
+리엑트<input type="checkbox" jin name="jcHobby" value="react" onclick="fClick(this)">
+
+<script>
+    // DOM 서치 변칙 테크닉, 잘 쓰면 아주 훌륭함!
+    const jcCkBoxs = document.querySelectorAll("[jin]");
+    var totalCnt = 0; // 시작 시 체크된 게 없어서 초기값 0
+    const LimitCount = 4;
+
+    function fClick(pThis){
+        // alert(event.target.value); // 값 접근
+
+        
+        // 체크 여부 확인
+        if(event.target.checked){
+            // 체크 안 된 걸 체크할 때 발생
+            totalCnt++;
+            if(totalCnt > LimitCount){
+                alert("체크 불가");
+                totalCnt--; // 위에서 증가시킨 거 취소
+                event.target.checked=false; // 체크한 것도 취소
+            }
+        } else {
+            // 체크된 걸 체크 해제하는 경우
+            totalCnt--;
+        }
+        alert("현재 체크 갯수는"+totalCnt);
+    }
+    
+    /*
+    function fClick(){
+        // alert(event.target.value); // 값 접근
+
+        
+        // 체크 여부 확인
+        if(event.target.checked){
+            // 체크 안 된 걸 체크할 때 발생
+            totalCnt++;
+            if(totalCnt > LimitCount){
+                alert("체크 불가");
+                totalCnt--; // 위에서 증가시킨 거 취소
+                event.target.checked=false; // 체크한 것도 취소
+            }
+        } else {
+            // 체크된 걸 체크 해제하는 경우
+            totalCnt--;
+        }
+        alert("현재 체크 갯수는"+totalCnt);
+    }
+
+    
+
+    // 이벤트 등록
+    for(let i=0; i<jcCkBoxs.length; i++){
+        jcCkBoxs[i].addEventListener("click",fClick);
+
+    }
+        */
+
+</script>
+</body>
+</html>

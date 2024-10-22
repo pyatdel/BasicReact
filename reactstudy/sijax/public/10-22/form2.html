@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>form 전송막기2</h1>
+<form id="sForm">
+        <!-- 이름 <input type="text" name="sname" value="수민"><br> -->
+        <!-- 나이 <input type="number" name="sage" value="23"><br> -->
+        이름 <input type="text" name="sname" value="수민" required readonly ><br>
+        나이 <input type="number" name="sage" value="23" required ><br>
+         <input type="submit" value="떤송">   <!-- <=여기에 onclick는 안좋다. -->
+         <input type="button" value="떤송" onclick="fJH()">   
+</form>
+
+</form>
+<script>
+const sForm = document.querySelector("#sForm");
+
+function fJH(){ // 이렇게 하면, require 기능을 모두 작성해야 한다.
+    // sForm.submit(); // 전송 요청
+    sForm.requestSubmit() // 전송해 줘(onclick로 할거면 이렇게!)
+}
+
+sForm.onsubmit = ()=>{
+    event.preventDefault(); // form 전송 막기
+    /*
+        ajax코드
+    */
+}
+</script>
+</body>
+</html>

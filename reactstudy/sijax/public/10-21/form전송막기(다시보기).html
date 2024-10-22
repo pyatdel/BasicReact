@@ -7,8 +7,11 @@
 <body>
     <!-- form 태그는 몇번을 써도 상관없다. 단, form 태그 안에 form태그 사용 안 함 -->
     <!-- <form action="" method="get">  action의 디폴트값은 현재 주소표시줄 값, method -->
-        <form onsubmit="return fSubmit()">
+    <form action="//naver.com" onsubmit="return fSubmit()">
         <input type="text" name="fname" value="소현">
+        <input type="text" name="fname" value="순건">
+        <input type="text" name="fname" value="유정">
+        <input type="text" name="fname" value="수민">
         <!--        이걸 안하면 자동으로 submit으로 변해서, 전송되버림(form 안의 button을 만들었을 때의 특징) 
         <button type="button">떤송</button>-->
         <button type="submit">떤송</button>
@@ -28,7 +31,7 @@
     </form>
 <script>
     function fSubmit(){
-        if(document.forms[0].fname.value == "진우"){
+        if(document.forms[0].fnamep0[0].value == "진우"){
             return true;
         }
         return false;
