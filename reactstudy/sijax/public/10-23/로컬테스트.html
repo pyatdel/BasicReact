@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<button onclick="fTest1()">버튼1</button>
+<button onclick="fTest2()">버튼2</button>
+
+<script>
+/*
+var mgArr = ["흥","치","핑"];
+mgArr.splice(1,1);  // 파괴적 메소드, history가 필요한 경우엔 쓰지 말라고 권장됨
+alert(mgArr);
+*/
+
+function fTest1(){
+    // localStorage 수정 방식 
+    let curArr = JSON.parse(localStorage.getItem("friends"));
+    for(let i=0; i<curArr.length; i++){
+        if(curArr[i].name == "민수"){
+          curArr.splice(i,1);
+          break;
+        }
+    }
+    localStorage.setItem("friends",JSON.stringify(curArr));
+  // 로컬 스토리지에서 {name:"민수",nickName:"외면"} 거이 안보이겡
+}
+
+function fTest2(){
+   // 광재의 nickName이 백만장자로 바뀌겡
+   // 로컬 스토리지의 내용을 메모리로 읽어들여  역직렬화진행
+   let friends = JSON.parse(localStorage.getItem("friends"));
+
+   // 필요한 내용 실행 (메모리상에서 실행)
+   friends.forEach(friend =>{
+       if(friend.name == "광재"){
+         friend.nickName = "백만장자"
+       }
+   });
+
+   // 로컬 스토리의 해당 키값 내용 덮어쓰기(하드디스크에 저장)
+   localStorage.setItem("friends",JSON.stringify(friends))
+}
+
+const myFriends = [
+   {name:"광재",nickName:"광부"},
+   {name:"윤호",nickName:"유노"},
+   {name:"민수",nickName:"외면"},
+   {name:"미강",nickName:"자스천"},
+   {name:"지영",nickName:"자스신"}
+];
+
+localStorage.setItem("friends", JSON.stringify(myFriends));
+
+/*
+const btn1 = document.getElementById(fTest1);
+alert(btn1);
+const btn2 = document.getElementById(fTest2);
+alert(btn2);
+*/
+
+</script>

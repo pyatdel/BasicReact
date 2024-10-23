@@ -47,3 +47,12 @@ const [변수명, set변수명] = useState(초기값)
 event.stopPropergation => 이벤트 전파 막기(버블링 => 캡처링)
 event.preventDefault() => built-in 이벤트 막기
 encoding %20 / decoding
+
+__________________________________________
+requestSubmit() vs requestSubmit
+JSON.strinfify() vs JSON.parse()
+enent.target vs enent.currentTarget
+readOnly(전송되고) vs disabled(전송안됨)
+select = 모바일 multiple로 체크박스 대신 여러선택에 사용, selected
+checkbox checked
+css 선택자를 이용한 select 변칙 테크닉 [jc] 잘 쓰면 아주 있어 보임(단순한 규칙이 아닌, 변칙 테크닉)
