@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jcSuccess.js"></script>
+<script>
+    let pid = request.getParameter("pid");
+    
+    const bdKey = "bdTable";                 
+    let bdArr = JSON.parse(localStorage.getItem(bdKey));
+
+    for(let i=0; i<bdArr.length; i++){
+        let bd = bdArr[i];
+        if(bd.pid == pid){
+            bdArr.splice(i,1);  // 해당 index 1개 지우깅
+            break;              // 빼먹지 말깅
+        }
+    }
+
+    //로컬 스토리지 내용 덮어쓰깅
+    localStorage.setItem(bdKey, JSON.stringify(bdArr));
+
+    alert("잘 지워졌어용~~");
+    location.href = "list.html";
+</script>

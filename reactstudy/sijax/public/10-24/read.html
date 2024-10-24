@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../10-23/jcSuccess.js"></script>
+</head>
+<body>
+    <form action="update_action.html" method="get" id="suminForm">
+        <!-- 사용자에게 보여 줄 필요는 없고 난 프로그램 하는데 사용 -->
+        <input type="hidden" name="pid" value="">
+        제목 <input type="text" autofocus  name="yjTitle" required><br>
+        글쓰니<input type="text" name="yjWriter" readOnly><br>
+        글쓰니 스킬<br>
+        <hr>
+        자스<input type="checkbox" name="yjSkills" value="js" checked>
+        리액트<input type="checkbox" name="yjSkills" value="react">
+        자바<input type="checkbox" name="yjSkills" value="java" >
+        오라클<input type="checkbox" name="yjSkills" value="oracle" >
+        <br>내용<br>
+        <textarea name="yjContent" cols="40" rows="10"></textarea><br>
+        <input type="button" value="수정" onclick="fSubmit(this.value)">
+        <input type="button" value="삭제" onclick="fSubmit(this.value)">
+    </form>
+    <script>
+        function fSubmit(btnVal) {
+            suminForm.action = "update_action.html"; // 디폴트값 
+            if(btnVal == "삭제") {
+                suminForm.action = "delete_action.html";
+            }
+                suminForm.requestSubmit();
+        }
+
+        const suminForm = document.querySelector("#suminForm");
+
+        /*
+        suminForm.onsubmit = function(){
+            
+            event.preventDefault(); // 일단 전송 막기
+            console.log("체크: "+event.target);
+        }
+        */
+
+        // 넘어온 pid 값 읽기
+        let pid = request.getParameter("pid");
+
+        // 로컬 스토리지 내용 읽어오기
+        const bdKey = "bdTable";
+        const bdArr = JSON.parse(localStorage.getItem(bdKey));
+
+        // 테스트 1개 더
+        // bdArr에 메소드 filter를 사용하여 pid가 같은거 찾아오기
+        // filter는 새 배열을 리턴함, 원본은 지켜짐
+        let bd = bdArr.filter( bd => bd.pid == pid)[0];
+            console.log("반드시 알아야 해",bd);
+            suminForm.yjTitle.value = bd.title;
+            suminForm.yjWriter.value = bd.writer;
+            suminForm.yjContent.value = bd.content; 
+            suminForm.pid.value = bd.pid;
+            for(let j=0; j< bd.skills.length; j++){
+                // css 선택자 [] 속성 체크 잘 쓰면 아주 편리 !!@@@@
+                document.querySelector(`[type=checkbox][value=${bd.skills[j]}]`).checked=true; // css 선택자. 아주 유용하
+            }
+            
+        /*
+        for(let i=0; i<bdArr.length; i++){
+        let bd = bdArr[i];
+        if(bd.pid == pid){  // 찾던 글! , 클릭한 글
+            suminForm.yjTitle.value = bd.title;
+            suminForm.yjWriter.value = bd.writer;
+            suminForm.yjContent.value = bd.content;
+
+           // alert("체크" + bd.skills);
+
+            // 졸릴때는 테스트
+            // 체크박스에 해당 스킬을 체크하세요!
+
+           for(let j=0; j< bd.skills.length; j++){
+              // css 선택자 [] 속성 체크 잘 쓰면 아주 편리!!
+              document.querySelector(`[type=checkbox][value=${bd.skills[j]}]`).checked=true;
+           } 
+
+
+          break;  // 더 할게 없는데 하면 낭비!
+        }
+    }
+        */
+
+    </script>
+</body>
+</html>

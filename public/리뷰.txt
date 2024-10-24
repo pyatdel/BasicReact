@@ -1,0 +1,65 @@
+react  자바스크립트 UI 라이브러리(프레임워크)
+node   자바스크립트 런타임 환경  JRE
+nvm    Node Version Manager (여러버젼 node)
+npm    Node Package Manager (프로젝트 정보랑, 모듈관리)
+npx?   Node Package eXcuecutor (설치없이 그냥 한번씩 실행)
+
+원시타입(복사)/객체타입(참조)  => 절대 기억!
+Wrapper (불편한걸 편리하게 바꿔주는 애) => string => String
+
+json  []식 속성 접근법, 모르면 프로그램이 이상해 질수 있음
+for    in 객체 정도 알아두면 좋음 
+함수   return => 생략 되어 있고, 함수의 종료를 의미
+       매개변수 와 리턴 타입에는 제약사항이 없당
+       ==> 콜백함수(조금 에너지와 시선을 좀더 줘서)
+
+JSX(컴포넌트)   babel.js
+react plugin  rfce rafce 
+
+layout 
+css position  => 부모 relative 자식 absolute
+transform 
+z-inex
+숙제  경우의 수를 생각!!!
+
+React Props , JSX 태그 안 속성들 전체 받아오는 객체
+
+prototype => 메소드 공유
+function 키워드를 class의 의미
+전개연산자 -> spread operator ...., 객체 복사
+구조분해   -> 값 뽑아내기 쉬워짐 
+콜백함수 눈이 따라가도록 연습
+
+메소드체인  => 메소드 안에 return this
+appendChild -> append
+화살표함수 -> this를 쓸거면 그냥 function 
+              매개변수 => 값
+              (매개변수) => {
+                  return 값;
+              }
+
+JSONP      
+
+// reactive변수, 요게 값이 변경되면 다시 그림(rendering)
+const [변수명,set변수명] =useState(초기값)
+// hook 이란 건 리액트에서 제공해주는 개발자 편의 함수
+// use....
+event.stopPropergation()  => 이벤트 전파 막기(버블링 => 캡처링)
+event.preventDefault()  => built-in 이벤트 막기
+ending %20/decoding
+
+requestSubmit() vs submit()
+JSON.stringify() vs JSON.parse()
+event.target  vs event.currentTarget
+readOnly(전송되고) vs disabled(전송안됨)
+select => 모바일 multiple로 체크박스 대신 여러선택에 사용, selected
+checkbox  checked 
+css 선택자를 이용한 select 변칙 테크닉 [jc]  요건 아주 있어 보인당.
+
+localstorage => 문자열밖에 저장 안됨
+                JSON.stringify => 저장할 때(원시타입은 제외)
+                JSON.parse     => 읽을 때 (원시타입은 제외)
+
+split => 배열, 
+배열요소 삭제   배열객체.splice(인덱스번호,갯수)  파괴적메소드, 주의해서 사용
+location  주소값 잘라서 getParameter, getParameterValues

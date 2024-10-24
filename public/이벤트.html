@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <!-- 인라인 이벤트 등록법, 여기에 ()는 호출문법이 아님, 헷갈리지 맙시당 -->
+   <button onclick="fClick(this)"  id="jyBtn">눌러방</button>
+   <button id="suminBtn">또 눌러방</button>
+   <button id="syBtn">
+      소현퍼즐 <span style="color:blue;font-size:2em;">맞추깅</span>
+   </button>
+</body>
+<script>
+const syBtn = document.querySelector("#syBtn");
+syBtn.onclick = () =>{
+    console.log("체킁:",event.target);
+    console.log("체킁2",event.currentTarget);// 항상 이벤트 걸어 준애가 나옴
+}
+
+
+// 이벤트, 마우스,키보드 두드리기등등...
+const jyBtn = document.querySelector("#jyBtn");
+const suminBtn = document.querySelector("#suminBtn");
+
+/*이벤트 등록법 2번
+suminBtn.onclick = function(){
+    alert("난 수민 버튼이라고 행");
+}
+
+//이벤트 등록법 2번, 오버라이딩
+suminBtn.onclick = ()=>{
+    console.log("체킁:",event.target);  // event.target 이벤트를 발생 시킨 아이를 가리킴
+    alert("난 유정 버튼이라고 하는뎅뎅");
+}
+*/
+
+// 이벤트  등록법 3번 (권장 방식, 규모가 커져서 대응으로 나옴)
+// 사용에 주의가 필요!, 안 그럼 같은 코드가 아주 여러번 실행 될 수 있음!
+suminBtn.addEventListener("click",function(){
+    alert("난 수민 버튼이얌");
+    jyBtn.addEventListener("click",()=>{
+       alert("나 지영이얌1!") 
+    })
+})
+
+suminBtn.addEventListener("click",function(){
+   alert("난 미강 버튼인뎅");
+   jyBtn.addEventListener("click",()=>{
+       alert("나 지영이얌2!") 
+  })
+})
+
+
+
+function fClick(pBtn){
+   console.log(pBtn.parentElement);
+   alert("나 눌렀닝?");
+}
+</script>

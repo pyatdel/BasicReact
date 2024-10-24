@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+   #container {
+     position: relative;
+     border:1px solid black;
+     width:200px;
+     height:200px;
+     left:100px;
+   }
+   .sumin {
+     background-color: blueviolet;
+     color:white;
+     width:190px;
+     height:190px;
+     border:3px solid pink;
+     position: absolute;
+     left:0px;
+     top:0px;
+     /* 만약 부모 position이 relative면 기준 점이 브라우져 왼쪽 모서리가 
+        아니고 부모 왼쪽 모서리가 됨
+     */
+   }
+   #sohyun {
+      /* z-index 숫자가 클수로 앞으로 나옴 */
+      z-index:9999; 
+   }
+</style>
+</head>
+<body>
+  <h1>윤호 유노</h1>
+  <div id="container">
+    <div class="sumin">
+        진모
+    </div>
+    <div class="sumin" id="sohyun">
+        소현
+    </div>
+    <div class="sumin">
+        정민
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<h1>엉터리 글쓰기</h1>
+<form action="write_action.html" method="get">
+   제목 <input type="text" autofocus  name="yjTitle" required><br>
+   글쓰니<input type="text" name="yjWriter" required><br>
+   글쓰니 스킬<br>
+   <hr>
+   자스<input type="checkbox" name="yjSkills" value="js" checked>
+   리액트<input type="checkbox" name="yjSkills" value="react">
+   자바<input type="checkbox" name="yjSkills" value="java" >
+   오라클<input type="checkbox" name="yjSkills" value="oracle" >
+   <br>내용<br>
+   <textarea name="yjContent" cols="40" rows="10"></textarea><br>
+   <input type="submit" value="등록">
+   <input type="reset" value="다시쓰기">
+</form>
+</body>
+</html>

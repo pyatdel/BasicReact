@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+  <div id="disp"></div>
+</body>
+<script>
+// 전역변수, 화면에 고정적으로 존재하는 건 미리 찾아놓음
+const disp = document.querySelector("#disp");
+
+// 전역함수 
+function fOver(pTR){  // TR 태그 위에 마우스
+  //console.log("체킁:",pTR);
+  const merong = "color";
+  const colValue = "pink";
+  pTR.style[merong]=colValue;
+  pTR.style["backgroundColor"]="black";
+
+}
+
+function fOut(pTR){  // TR 태그에서 마우스 벗어남
+  //console.log("체킁:",pTR);
+  pTR.style.color="black";
+  pTR.style.backgroundColor="white";
+}
+
+const members = [
+   {name:"승민",age:24,nickName:"잘모름",pos:"level2"},
+   {name:"진우",age:29,nickName:"지누",pos:"level1"},
+   {name:"진찬",age:24,nickName:"찬진",pos:"level4"},
+   {name:"원근",age:23,nickName:"근시",pos:"level3"},
+   {name:"수민",age:24,nickName:"민수",pos:"level4"},
+   {name:"유정",age:23,nickName:"정유",pos:"level3"}
+];
+
+const positions = {
+  level1: "사장님",
+  level2: "팀장님",
+  level3: "넘버3",
+  level4: "사원님"
+};
+
+// `(백틱)은 멀티라인 문자열 처리에 아주 편함
+let tblStr = 
+  `<table border=1 width=600>
+    <tr><th>이름</th><th>나이</th><th>별명</th><th>직책</th></tr>
+  `;
+
+for(let i=0; i< members.length; i++){
+   let member = members[i];
+  tblStr += `
+            <tr onmouseover="fOver(this)" onmouseout="fOut(this)">
+              <td>${member.name}</td>
+              <td>${member.age}</td>
+              <td>${member.nickName}</td>
+              <td>${positions[member.pos]}</td>
+            </tr>
+          `;
+}
+tblStr += "</table>";
+disp.innerHTML = tblStr;  // 화면에 출력
+
+
+
+
+</script>

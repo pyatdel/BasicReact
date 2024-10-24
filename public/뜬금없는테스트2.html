@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<h1>진찬이 젤 좋아하는 언어는?</h1>
+<select id="jcSel" multiple size="6">
+    <option value="java">자바</option>
+    <option value="js">자바스크립트</option>
+    <option value="oracle">오라클</option>
+    <option value="css">CSS</option>
+    <option value="react">리액트</option>
+</select>
+<hr>
+<button jcBtn  >자바</button>  
+<button jcBtn  >자바스크립트</button>  
+<button jcBtn  >오라클</button>  
+<button jcBtn >CSS</button>  
+<button jcBtn >리액트</button>
+<script>
+    const jcSel = document.querySelector("#jcSel"); // select
+    const jcBtns = Array.from(document.querySelectorAll("[jcBtn]"));
+    const jcBtnClick = ()=>{
+       //alert(event.target.innerHTML);
+       //alert(event.target.dataset.jcValue);  // 사용자 정의 속성 접근
+       // select 사용이 하도 많아서 사용법을 간편하게 고쳐줌!
+       // jcSel.value = event.target.dataset.jcValue;
+
+       // 정석
+       let opts = jcSel.options;
+       for(let i=0; i< opts.length; i++){
+           //if(opts[i].value == event.target.dataset.jcValue){
+            if(opts[i].innerHTML == event.target.innerHTML){
+              //alert(opts[i].selected);
+              opts[i].selected = !opts[i].selected; // 강제 선택
+              break;                   // 더이상 할 필요가 없으닝 도망
+           }
+       }
+    }
+
+    jcBtns.forEach(jcBtn => {
+       jcBtn.addEventListener("click",jcBtnClick)
+    })
+</script>
+</body>
+</html>

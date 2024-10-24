@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jcSuccess.js"></script>
+<script>
+  // localStorage에 insert가 필요
+  // alert(request.getParameterValues("yjSkills"));
+
+  // 값을 뽑아서 
+  let title = request.getParameter("yjTitle");
+  let writer = request.getParameter("yjWriter");
+  let skills = request.getParameterValues("yjSkills");
+  let content = request.getParameter("yjContent");
+
+  // 위 내용을 한 덩어리로
+  let gul = {
+     pid: Math.random().toString(36).substring(2,5),
+     title,
+     writer,
+     skills,
+     content
+  }
+  console.log("체킁",gul);
+
+  // 앞으로 글을 누적해서 저장해야 하므로 배열도 필요
+  const bdKey = "bdTable"; 
+                 
+  let chk = localStorage.getItem(bdKey);
+  let gulArr = [];  // 빈 배열
+  if(chk){     // 이미 쓰여진 글이 있다면 
+     gulArr = JSON.parse(chk);  // 읽어온 걸 객체화
+  }
+  gulArr.push(gul);  // 배열에 글 추가
+
+  localStorage.setItem(bdKey, JSON.stringify(gulArr));
+
+  alert("글이 잘 등록 되었어용 그렇티용");
+
+  location.href="list.html";  // redirect와 같음
+ // location.replace("list.html");
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  alert(getParameter("yjTitle"));
+//  alert(getParameter("yjWriter"));
+//  alert(getParameter("yjContent"));
+
+  /* 만약에 yjTitle값을 뽑는다면, 하지만 요따구로는 못써, 개발자 죽음
+     모든 상황에 개발자가 필요 
+  alert( queryString.split("&")[1].split("=")[1]);
+  */ 
+
+
+
+</script>

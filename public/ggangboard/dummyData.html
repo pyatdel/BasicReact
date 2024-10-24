@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 로컬 스토리지 내용 읽어오기
+const bdKey = "bdTable";
+// 108개의 더미 데이터를 만들것임.
+const dummyArr = [];  // 빈배열
+
+function ranSkills(){
+    let skills = ["js","java","oracle","react"];
+    let ranCnt = Math.floor(Math.random()*3);
+
+    for(let i=0; i<ranCnt; i++){
+       skills.splice(Math.floor(Math.random()*skills.length),1);
+    }
+    return skills;
+}
+
+for(let i=1; i<=108; i++){
+    let ranGul = {
+       pid:Math.random().toString(36).substring(2,6),
+       title:`모든 책임은 수민에게로 ${i}`,
+       writer:`수${i}민`,
+       content:`${i} 내용이얌`,
+       skills: ranSkills()
+    }
+    dummyArr.push(ranGul);
+}    
+
+localStorage.setItem(bdKey,JSON.stringify(dummyArr));
+
+</script>

@@ -56,3 +56,12 @@ readOnly(전송되고) vs disabled(전송안됨)
 select = 모바일 multiple로 체크박스 대신 여러선택에 사용, selected
 checkbox checked
 css 선택자를 이용한 select 변칙 테크닉 [jc] 잘 쓰면 아주 있어 보임(단순한 규칙이 아닌, 변칙 테크닉)
+
+//______________________________________
+localstorage => 문자열밖에 저장 안 됨
+    JSON.stringify => 저장할 때(원시타입은 제외)
+    JSON.parse     => 읽을 때 (원시타입은 제외)
+
+split => 배열,
+배열요소 삭제   배열객체.splice(인덱스번호, 갯수) 파괴적 메소드, 주의해서 사용
+location 주소값 잘라서 getParameter, getParameterValues

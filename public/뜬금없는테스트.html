@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<h2>진찬이의 취미는 3가지를 넘지 않아용</h2>
+<hr>
+자바<input type="checkbox" jin  name="jcHobby" value="java" onclick="fClick(this)">  
+자바스크립트<input type="checkbox" jin name="jcHobby" value="js" onclick="fClick(this)">  
+CSS<input type="checkbox" jin name="jcHobby" value="css" onclick="fClick(this)"> <br>
+스프링<input type="checkbox" jin name="jcHobby" value="spring" onclick="fClick(this)">  
+HTML<input type="checkbox" jin name="jcHobby" value="html" onclick="fClick(this)">  
+오라클<input type="checkbox" jin name="jcHobby" value="oracle" onclick="fClick(this)"><br>  
+리액트<input type="checkbox" jin name="jcHobby" value="react" onclick="fClick(this)"> 
+<script>
+  //  DOM 서치 변칙 테크닉, 잘 쓰면 아주 훌륭함!
+  const jcCkBoxs = document.querySelectorAll("[jin]");
+  var totalCnt = 0;  // 시작시 체크된 게 없어서 초기값 0 
+  const LimitCount = 4; 
+
+  function fClick(pThis){
+     if(pThis.checked){
+        // 체크 안된 걸 체크할 때 발생 
+        totalCnt++;
+        // 리미트 처리 (허용 갯수는 3갱)
+        if(totalCnt > LimitCount){
+          alert("이미 3개 다 하셨네용! Good Bye");
+          totalCnt--; // 위에서 증가 시킨거 취소
+          pThis.checked=false; // 체크한것도 취소
+        }     
+     }else {
+       // 체크된 걸 체크 해제하는 경우
+       totalCnt--
+     }
+     //alert("현재 체크 갯수는" + totalCnt);
+  }
+
+  /*
+  function fClick(){
+     if(event.target.checked){
+        // 체크 안된 걸 체크할 때 발생 
+        totalCnt++;
+        // 리미트 처리 (허용 갯수는 3갱)
+        if(totalCnt > LimitCount){
+          alert("이미 3개 다 하셨네용! Good Bye");
+          totalCnt--; // 위에서 증가 시킨거 취소
+          event.target.checked=false; // 체크한것도 취소
+        }     
+     }else {
+       // 체크된 걸 체크 해제하는 경우
+       totalCnt--
+     }
+     alert("현재 체크 갯수는" + totalCnt);
+  }
+
+  // 이벤트 등록
+  for(let i=0; i<jcCkBoxs.length; i++){
+      jcCkBoxs[i].addEventListener("click",fClick)
+  }
+  */
+</script>
+</body>
+</html>

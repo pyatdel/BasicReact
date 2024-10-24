@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+  // localStorage는 객체를 직접 저장할 수 없음! 중요 JSON.stringify
+  // 오직 문자열로만 저장 가능
+  //alert({name:"양미강",nickName:"자스천"});
+  localStorage.setItem("ymg",JSON.stringify({name:"양미강",nickName:"자스천"}));
+
+  let ymg =  JSON.parse(localStorage.getItem("ymg"));
+  alert(`${ymg.name}은 ${ymg.nickName}임당`); //?? undefined
+</script>

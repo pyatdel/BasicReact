@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>엉터리 게시판</title>
+</head>
+<body>
+  <h1>엉터리 게시판</h1>
+  <div id="disp"></div>
+  <script>
+    // 전역변수 전역함수
+    const disp = document.querySelector("#disp");
+    function fOver(jwTr){
+        jwTr.style.backgroundColor="black";
+        jwTr.style.color="yellow";
+    }
+    function fOut(jwTr){
+      jwTr.style.backgroundColor="white";
+      jwTr.style.color="black";
+    }
+
+
+    // 로컬 스토리지 내용 읽어오기
+    const bdKey = "bdTable";
+    const bdArr = JSON.parse(localStorage.getItem(bdKey));
+
+    console.log("체크",bdArr); // 좋은 디버깅 습관, 눈으로 보기
+
+    // 테이블로 뿌리기
+    let tblStr = `
+        <table border=1  width=500>
+          <tbody>
+            <tr><th>순번</th><th>제목</th><th>글쓴이</th><th>스킬</th></tr>
+        `;
+
+    for(let i=0; i<bdArr.length; i++){
+       let bd = bdArr[i];
+       tblStr += `
+          <tr onmouseover="fOver(this)"  onmouseout="fOut(this)">
+             <td>${i+1}</td> 
+             <td><a href="read.html?pid=${bd.pid}">${bd.title}</a></td> 
+             <td>${bd.writer}</td> 
+             <td>${bd.skills}</td> 
+          </tr>  
+       `
+    }
+
+    tblStr += `</tbody></table>
+        <br><br>
+        <a href="write.html">글쓰기</a>
+    `;
+    disp.innerHTML = tblStr;   // disp안에 table 그리기
+
+  </script>
+</body>
+</html>

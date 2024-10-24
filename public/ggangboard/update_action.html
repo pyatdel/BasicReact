@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jcSuccess.js"></script>
+<script>
+  // 값을 뽑아서 
+  let pid = request.getParameter("pid");
+  let title = request.getParameter("yjTitle");
+  let skills = request.getParameterValues("yjSkills");
+  let content = request.getParameter("yjContent");
+
+  // 앞으로 글을 누적해서 저장해야 하므로 배열도 필요
+  const bdKey = "bdTable";                 
+  let bdArr = JSON.parse(localStorage.getItem(bdKey));
+
+  // pid에 해당하는 글 찾기
+  let bd = bdArr.filter(bd => bd.pid == pid)[0];
+
+  // 찾은 글 실제 수정
+  bd.title = title;
+  bd.skills = skills;
+  bd.content = content;
+
+  // 수정된 내용으로 localStorage에 덮어쓰깅
+  localStorage.setItem(bdKey, JSON.stringify(bdArr));
+
+  alert("글이 잘 수정 되었어용 그렇티용");
+
+  location.href="list.html";  // redirect와 같음
+ // location.replace("list.html");
+</script>
