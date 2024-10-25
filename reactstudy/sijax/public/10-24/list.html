@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>엉터리 게시판</title>
+<style>
+  th {
+     background-color: orange;
+  }
+
+  .active {
+     color:red;
+     font-size: 10em;
+  }
+</style>
+<script src="../10-23/jcSuccess.js"></script>
 </head>
 <body>
   <h1>엉터리 게시판</h1>
@@ -19,21 +30,40 @@
       jwTr.style.color="black";
     }
 
-
+   //  p  1   2
+   //  s  0  10
+   //  e  9  19
     // 로컬 스토리지 내용 읽어오기
     const bdKey = "bdTable";
     const bdArr = JSON.parse(localStorage.getItem(bdKey));
 
     console.log("체크",bdArr); // 좋은 디버깅 습관, 눈으로 보기
 
+    // 페이지 나누기 -> 이거슨 초등 산수, 초보 변수 선언 아낄려고(X)
+    let curPage = 1;    // 현재 페이지 일단 1페이지라고 가정
+         
+    if(request.getParameter("pageNum")){
+        curPage = request.getParameter("pageNum");
+    }
+
+    const gCntPerPage = 10;
+    let  totalGulCnt = bdArr.length; 
+    let  sPageNum = (curPage-1) * gCntPerPage;
+    let  ePageNum = curPage*gCntPerPage  ;  // 단순 무조건적인 마지막 페이지 계산
+    let  totalPageCnt = Math.ceil(totalGulCnt / gCntPerPage); // 나머지가 있으면 +1
+
+    // 마지막 페이지는 딱 갯수가 떨어질 때 빼고는 보정이 필요
+    if(ePageNum > totalGulCnt) ePageNum = totalGulCnt;
+
     // 테이블로 뿌리기
     let tblStr = `
         <table border=1  width=500>
           <tbody>
-            <tr><th>순번</th><th>제목</th><th>글쓴이</th><th>스킬</th></tr>
+            <tr><th>순번</th><th>제목</th><th>글쓰니</th><th>스킬</th></tr>
         `;
 
-    for(let i=0; i<bdArr.length; i++){
+    for(let i=sPageNum; i<ePageNum; i++){
+       console.log("진모짱",i);
        let bd = bdArr[i];
        tblStr += `
           <tr onmouseover="fOver(this)"  onmouseout="fOut(this)">
@@ -45,10 +75,22 @@
        `
     }
 
-    tblStr += `</tbody></table>
-        <br><br>
-        <a href="write.html">글쓰기</a>
-    `;
+    tblStr += `</tbody></table><br>`;
+    
+    // 오늘의 테스트 마지막 페이지 에러를 생각해 보고, 대응해보기
+    // 제한시간 10분
+
+    // 페이지 넘버링 
+    for(let page=1; page <= totalPageCnt; page++){
+       if(page == curPage){
+         tblStr += `<a  class="active" href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
+       }else {
+         tblStr += `<a href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
+       }
+    }
+
+    tblStr += `<br><br><a href="write.html">글쓰기</a>`;
+
     disp.innerHTML = tblStr;   // disp안에 table 그리기
 
   </script>

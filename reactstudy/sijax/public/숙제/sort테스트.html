@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+  .suminBtn {
+     font-size: 2em;
+     color:blueviolet
+  }
+</style>
+</head>
+<body>
+ <button onclick="fCk()" class="suminBtn">누르면</button>
+ <table border="1" width="400">
+    <thead>
+      <tr>
+        <th>순번</th>
+        <th onclick="fName()" >이름</th>
+        <th onclick="fAge()" >나이</th>
+        <th onclick="fAlias()" >별명</th>
+      </tr>
+    </thead>
+    <tbody id="sumin" style="text-align: center;">
+      <tr>
+        <td>1</td>
+        <td>성윤정</td>
+        <td>27</td>
+        <td>수제자</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>강유정</td>
+        <td>22</td>
+        <td>웃음뿐</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>육수민</td>
+        <td>23</td>
+        <td>묵언수행</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>전진찬</td>
+        <td>23</td>
+        <td>고급질문</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>양소현</td>
+        <td>22</td>
+        <td>레드카펫</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>박지영</td>
+        <td>28</td>
+        <td>백지영</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>양미강</td>
+        <td>24</td>
+        <td>자스천재</td>
+      </tr>
+    </tbody>
+ </table>
+ <br><br>
+ <table border="2" width="350">
+    <tbody id="yjTNa"></tbody>
+ </table>
+
+ <script>
+  const tbody = document.querySelector("tbody");
+  const yjTNa = document.querySelector("#yjTNa");
+  function fCk(){
+    const trs = document.querySelectorAll("#sumin > tr");
+    //tbody.appendChild(trs[0]);
+    yjTNa.appendChild(trs[0]);  // 이미 있는 걸 추가하면 이동함!
+  }
+ </script>
+</body>
+</html>
+
+<!-- tr 부분을 누르면 해당 값들로 정렬되도록 하기 -->

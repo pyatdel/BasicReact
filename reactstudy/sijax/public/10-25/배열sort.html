@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+//class로 쓰는 SuminArray
+function SuminArray(){
+   this.length = 0;
+   return this;
+}
+
+SuminArray.prototype.push = function(pArg){
+  this[this.length] = pArg;
+  this.length++;
+  return this;    //  메소드 체이닝?
+}
+// sort 메소드 직접 구현
+
+// 요 sort를 이해하면 엄청나게 훌륭!, 콜백함수 완벽 이해!!
+SuminArray.prototype.sort = function(pCB){
+  for(let j=0; j<this.length; j++){
+    for(let i=j+1; i<this.length;i++){
+      if(pCB(this[j],this[i]) > 0 ){   // sort((a,b))
+        let suminTemp = this[j];  // swap 자리 바꿈
+        this[j] = this[i];
+        this[i] = suminTemp;
+      }
+    }
+  }
+}
+
+let testSumin = new SuminArray();
+for(let i=1; i<8; i++){
+  testSumin.push( Math.round(Math.random()*10)+ 20);
+}
+//let copySumin = [...testSumin];  // 안타깝게 SuminArray는 지원 안됨!
+let copySumin = structuredClone(testSumin); 
+console.log("정렬전: ",copySumin);
+
+testSumin.sort(function(a,b){
+   return b - a;
+});
+console.log("정렬후: ",testSumin);
+
+
+
+
+
+
+
+
+
+
+// 배열에 제공되는 정렬 메소드 sort();
+
+//alert({name:"수민",age:20,nickName:"AOA"} < {name:"소현",age:21,nickName:"Red Carpet"});  // NaN  Not a Number
+//let suminArr = [7,9,3,1,8,2,7];
+//let suminArr = ["정민","진모","완희","민수","지영","미강"];
+
+let suminArr = [
+    {name:"수민",age:20,nickName:"AOA"},
+    {name:"소현",age:21,nickName:"Red Carpet"},
+    {name:"윤정",age:23,nickName:"Angel"},
+    {name:"지영",age:22,nickName:"God"}
+]
+
+// 배열을 복사, 왱? 출력 결과가 눈을 어지럽힘!
+const oldSumin = [...suminArr];    
+//console.log("이전상태",oldSumin);
+
+// name기준으로 정렬하세요
+suminArr.sort((a,b) =>{    // 콜백없는 그냥 sort()는 큰 도움이 안됨
+   // console.log("a=",a," b=",b);    
+    if(a.age > b.age) return -1;
+    return 1;
+  
+  //console.log("a=",a," b=",b); // 수민이 관심을 끌었음
+   //return b-a;
+});
+//console.log("이후상태",suminArr);
+
+
+
+
+/*  
+//          0  <  0.?? * 40 < 40
+let testArr = [];
+for(let i=1; i<=7; i++){
+   testArr.push( Math.round(Math.random()*40) +20);    //  20~60 사이의 랜덤 숫자 발생은?
+}
+console.log("체크:",testArr);
+
+// 요따구로 해서 버블정렬 탄생 (효율 안좋은 정렬, 하지만 쉬워서 많이 씀)
+for(let j=0; j<testArr.length; j++){
+  for(let i=j+1; i<testArr.length;i++){
+    if( testArr[j] < testArr[i]){
+       let suminTemp = testArr[j];  // swap 자리 바꿈
+       testArr[j] = testArr[i];
+       testArr[i] = suminTemp;
+    }
+  }
+}
+console.log("정렬결과",testArr);
+*/
+
+/*
+for(let i=1; i<testArr.length;i++){
+    if( testArr[0] < testArr[i]){
+       let suminTemp = testArr[0];  // swap 자리 바꿈
+       testArr[0] = testArr[i];
+       testArr[i] = suminTemp;
+    }
+}
+console.log("첫째자리",testArr);
+
+for(let i=2; i<testArr.length;i++){
+    if( testArr[1] < testArr[i]){
+       let suminTemp = testArr[1];  // swap 자리 바꿈
+       testArr[1] = testArr[i];
+       testArr[i] = suminTemp;
+    }
+}
+console.log("둘째자리",testArr);
+*/
+
+// 테스트3  배열요소 중 제일 큰값이 index 0 번 곧 첫번째 자리에 가도록 하세요
+
+
+// 다 아는 건데, 쌤이 심심할 까봐 일부러 조금 모르는 척
+/* 테스트 1  배열속의 최대 값을 찾아 출력하시오
+let max = testArr[0];  // 0번째 값이 맥스다라고 가정!
+for(let i=1; i<testArr.length;i++){
+    if( max < testArr[i]){
+      max = testArr[i];
+    }
+}
+console.log("최대값은",max);
+
+
+// 테스트 2  배열속의 최소 값을 찾아 출력하세요
+let min = testArr[0];  // 0번째 값이 맥스다라고 가정!
+for(let i=1; i<testArr.length;i++){
+    if( min > testArr[i]){
+      min = testArr[i];
+    }
+}
+console.log("최소값은",min);
+*/
+
+</script>
