@@ -65,3 +65,15 @@ localstorage => 문자열밖에 저장 안 됨
 split => 배열,
 배열요소 삭제   배열객체.splice(인덱스번호, 갯수) 파괴적 메소드, 주의해서 사용
 location 주소값 잘라서 getParameter, getParameterValues
+
+//______________________________________
+
+sort => max/min => 버블정렬 => callback => sort((a,b) =>{})
+prototype => 메모리 아끼려고, 메소드 공유
+css 선택자 부모 > 자식, 부모    후손
+page 나누기 => 이건 그냥 단순 산수
+structuredClone => 객체 복사, 원래 배열/객체 ... 전개연산자
+fakerjs로 더미 데이터 편하게 만들어 씀! (chatGPT를 더미데이터 만들 때 쓰면 훌륭)
+    > 더미데이터나 문법 고칠 때.. 
+
+//______________________________________1028

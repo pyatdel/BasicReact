@@ -3,96 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <title>엉터리 게시판</title>
-<style>
-  th {
-     background-color: orange;
-  }
-
-  .active {
-     color:red;
-     font-size: 10em;
-  }
-</style>
-<script src="../10-23/jcSuccess.js"></script>
+  
+  <style>
+    /* 기본 스타일 정의 */
+    th {
+      background-color: orange;
+    }
+    .active {
+      color: red;
+      font-size: 10em;
+    }
+  </style>
+  <script src="../10-23/jcSuccess.js"></script>
 </head>
 <body>
   <h1>엉터리 게시판</h1>
+  <div id="suminSch" style="text-align: right;">
+      <select id="schType">
+          <option value="title">제목</option>
+          <option value="writer">글쓴이</option>
+      </select>
+      <input type="search" id="schValue" value="">
+      <button onclick="suminSearch(this)">검색</button>
+  </div>
+  <!-- 이부분 다시보기
+  <button onclick="fJC()">
+      진찬이 질문 <span>좋아요</span>
+  </button>
+  -->
   <div id="disp"></div>
   <script>
+    function fJC(){
+      console.log("체크:", event.target); // 이 상황에서는 if문 필요
+      console.log("체크:", event.currentTarget); // 얘는 안바뀜
+    }
+
+    function suminSearch(schBtn){ // 이부분 다시보기
+      let suminSch = schBtn.closest("#suminSch");
+      let sType = suminSch.querySelector("#schType").value;
+      let sVal = suminSch.querySelector("#schValue").value;
+      let queryString = `sType=${sType}&sVal=${sVal}`;
+      // location.href = `${location.href}?${queryString}`;
+      location.href = `list.html?${queryString}`;
+
+      // alert(suminSch.querySelector("#schType").value)
+      // alert(suminSch.querySelector("#schValue").value)
+      // let queryString = title = 값
+    }
+
+
+
+
+
+
+
+
+
+    //===============================================
+    // 1. 전역 변수 및 이벤트 핸들러 함수 정의
+    //===============================================
     // 전역변수 전역함수
     const disp = document.querySelector("#disp");
-    function fOver(jwTr){
-        jwTr.style.backgroundColor="black";
-        jwTr.style.color="yellow";
+    
+    function fOver(jwTr) {
+      jwTr.style.backgroundColor = "black";
+      jwTr.style.color = "yellow";
     }
-    function fOut(jwTr){
-      jwTr.style.backgroundColor="white";
-      jwTr.style.color="black";
+    
+    function fOut(jwTr) {
+      jwTr.style.backgroundColor = "white";
+      jwTr.style.color = "black";
     }
 
-   //  p  1   2
-   //  s  0  10
-   //  e  9  19
-    // 로컬 스토리지 내용 읽어오기
+    //===============================================
+    // 2. 로컬 스토리지에서 데이터 로드
+    //===============================================
     const bdKey = "bdTable";
-    const bdArr = JSON.parse(localStorage.getItem(bdKey));
+    let bdArr = JSON.parse(localStorage.getItem(bdKey));     // console.log('//__________________________________________________');
+    console.log("체크", bdArr); // 좋은 디버깅 습관, 눈으로 보기
 
-    console.log("체크",bdArr); // 좋은 디버깅 습관, 눈으로 보기
-
+    //===============================================
+    // 3. 페이지네이션 관련 변수 설정
+    //===============================================
+    //  p  1   2   
+    //  s  0  10   
+    //  e  9  19    
     // 페이지 나누기 -> 이거슨 초등 산수, 초보 변수 선언 아낄려고(X)
     let curPage = 1;    // 현재 페이지 일단 1페이지라고 가정
-         
-    if(request.getParameter("pageNum")){
-        curPage = request.getParameter("pageNum");
+    let sType = "";   
+    let sVal = ""; 
+    if (request.getParameter("pageNum")) {
+      curPage = request.getParameter("pageNum");
     }
 
-    const gCntPerPage = 10;
-    let  totalGulCnt = bdArr.length; 
-    let  sPageNum = (curPage-1) * gCntPerPage;
-    let  ePageNum = curPage*gCntPerPage  ;  // 단순 무조건적인 마지막 페이지 계산
-    let  totalPageCnt = Math.ceil(totalGulCnt / gCntPerPage); // 나머지가 있으면 +1
+    if (request.getParameter("sType")) {
+      sType = request.getParameter("sType");
+      // select box 검색 조건
+      document.querySelector("#schType").value = sType;
+    }
+
+    if (request.getParameter("sVal")) {
+      sVal = request.getParameter("sVal");
+      // input type=search
+      document.querySelector("#schValue").value = sVal;
+    }
+
+    // 검색어가 있다면
+    let schBdArr = [];
+    if(sVal.trim()){
+
+
+      // 검색 조건에 맞는 거만 따로 배열에 담기
+      for(let i=0; i<bdArr.length; i++){
+        let bd = bdArr[i];
+        // console.log("광재 체크"+ "pp"+ bd[sType] +"pp" + sVal + "pp")
+        // if(bd[sType].trim() == sVal){
+          if(bd[sType].trim().includes(sVal)){
+          schBdArr.push(bd);
+        }
+      }
+      console.log("유노 체크",schBdArr);
+      bdArr = schBdArr;
+    }
+    
+
+    const gCntPerPage = 10;                                   // 한 페이지당 보여줄 글 수
+    let totalGulCnt = bdArr.length;                           // 전체 글 수
+    let sPageNum = (curPage - 1) * gCntPerPage;               // 현재 페이지 시작 글 번호
+    let ePageNum = curPage * gCntPerPage;                     // 단순 무조건적인 마지막 페이지 계산
+    let totalPageCnt = Math.ceil(totalGulCnt / gCntPerPage);  // 나머지가 있으면 +1
 
     // 마지막 페이지는 딱 갯수가 떨어질 때 빼고는 보정이 필요
-    if(ePageNum > totalGulCnt) ePageNum = totalGulCnt;
+    if (ePageNum > totalGulCnt) ePageNum = totalGulCnt;
+
+    //===============================================
+    // 4. HTML 테이블 생성
+    //===============================================
+    let tblStr = `
+      <table border=1 width=500>
+        <tbody>
+          <tr><th>순번</th><th>제목</th><th>글쓰니</th><th>스킬</th></tr>
+    `;
 
     // 테이블로 뿌리기
-    let tblStr = `
-        <table border=1  width=500>
-          <tbody>
-            <tr><th>순번</th><th>제목</th><th>글쓰니</th><th>스킬</th></tr>
-        `;
-
-    for(let i=sPageNum; i<ePageNum; i++){
-       console.log("진모짱",i);
-       let bd = bdArr[i];
-       tblStr += `
-          <tr onmouseover="fOver(this)"  onmouseout="fOut(this)">
-             <td>${i+1}</td> 
-             <td><a href="read.html?pid=${bd.pid}">${bd.title}</a></td> 
-             <td>${bd.writer}</td> 
-             <td>${bd.skills}</td> 
-          </tr>  
-       `
+    for (let i = sPageNum; i < ePageNum; i++) {
+      console.log("진모짱", i);
+      let bd = bdArr[i];
+      tblStr += `
+        <tr onmouseover="fOver(this)" onmouseout="fOut(this)">
+          <td>${i + 1}</td>
+          <td><a href="read.html?pid=${bd.pid}">${bd.title}</a></td>
+          <td>${bd.writer}</td>
+          <td>${bd.skills}</td>
+        </tr>
+      `;
     }
-
-    tblStr += `</tbody></table><br>`;
     
+    tblStr += `</tbody></table><br>`;
+
+    //===============================================
+    // 5. 페이지 네비게이션 생성
+    //===============================================
     // 오늘의 테스트 마지막 페이지 에러를 생각해 보고, 대응해보기
     // 제한시간 10분
+    // 페이지 넘버링
+    for (let page = 1; page <= totalPageCnt; page++) {
+      if(page == curPage){
+        if(sVal){
+         tblStr += `<a  class="active" href="list.html?pageNum=${page}&sType=${sType}&sVal=${sVal}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
+        }else {
+         tblStr += `<a  class="active" href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;
+        }      
+      }else {
+        if(sVal){
+         tblStr += `<a href="list.html?pageNum=${page}&sType=${sType}&sVal=${sVal}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
+        }else {
+         tblStr += `<a href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`; 
+        }    
+      }
+   }
 
-    // 페이지 넘버링 
-    for(let page=1; page <= totalPageCnt; page++){
-       if(page == curPage){
-         tblStr += `<a  class="active" href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
-       }else {
-         tblStr += `<a href="list.html?pageNum=${page}">${page}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;      
-       }
-    }
-
+    // 글쓰기 버튼 추가
     tblStr += `<br><br><a href="write.html">글쓰기</a>`;
 
-    disp.innerHTML = tblStr;   // disp안에 table 그리기
-
+    // 최종 HTML 렌더링
+    disp.innerHTML = tblStr;
   </script>
 </body>
 </html>

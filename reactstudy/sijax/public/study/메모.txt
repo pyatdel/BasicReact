@@ -49,3 +49,24 @@ engineer        developer
 array 와 arr의 차이점
 프로토타입 잘 사용하기 >> 함수 선언과 호출을 구분할 수 있다
 prototype : jsp의 기본
+
+//1028______________________________________시작
+
+콜백 중에, sort가 가장 애매한 부분 >> 배열은 sort만 알면 나머지는 쉬움
+class나 같은 id가 있을 때, cloeset을 많이 사용
+        > 처음만든 id를 찾으러 간다
+
+AJAX(밥줄!) 모르면 리액트 아예 할 수 없음
+안 하는 게 나음!
+SPA(Single Page Application)는 아작스만 씀
+
+스크립트 AJAX
+jQuery AJAX $ajax(...)
+fetch
+axios
+
+Promise (async / await 세트) - 꼭 알아야 한다
+
+메서드 
+get 엽서(내용이 바로 보임)
+post 편지(내용이 바로 안보임)

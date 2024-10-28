@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<button onclic="ajax()">아작스 호출</button>
+<div id="disp"></div>
+<script>
+    // AJAX Asynchronouse JAvascript XML
+    // 원본은 우리가 퀵서비스를 부르는 걸로 생각하면 된다!
+
+    // xhr를 전역변수로 지정하면 문제가 생긴다, but, 일이 하나만 있을 시, 괜찮다 ==> 보통 지역변수로 많이 사용
+
+    const disp = document.querySelector("#disp");
+
+    // 아작스 결과 처리 함수
+    function suminAjax(pData){
+        console.log("여기서 처리해요", pData);
+        // 숙제, 받은 pData를 <table> 형식으로 출력해보기
+    }
+
+    let checkData = "";
+    function ajax() {
+        let xhr = new XMLHttpRequest(); // 퀵서비스 호출 
+        // xhr.open("메소드 : get/post/host", "갔다올 곳 : url", "비동기 여부 : true/false"); // 시킬 일
+        xhr.open("get", "./data.csv", true); // 시킬 일
+
+
+
+
+
+        // 퀵 서비스 아저씨 상태 변화시, 이벤트 발생, 이벤트 발생에 어떻게 대응
+        xhr.onreadystatechange = function () { // 스타벅스의 진동벨
+
+            // 관심이 오직 퀵 서비스 아저씨 일 끝난 거에 있음 but, 신뢰가 안감
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) { // 서버에 사인을 요청(신뢰를 위해..)
+                    console.log(xhr.responseText); // 서버에서 가져온 걸 출력
+                    disp.innerHTML += `${xhr.responseText} + <br><br>`;
+                    
+                    checkData = xhr.responseText;
+
+                    suminAjax(checkData); // 메서드를 사용해서 소스 길이를 최소화
+
+                    // alert("자천 미강 중국 무협배우 이름 같음")  // 2
+                }
+            }
+        }
+
+        // xhr.send(get이아닐때만보낼내용물); // 시킨대로 하세요, 이벤트 등록을 먼저하지 않으면, 이벤트를 실행 안 하고 끝나는 경우가 있다.
+        xhr.send(); // 시킨대로 하세요, 이벤트 등록을 먼저하지 않으면, 이벤트를 실행 안 하고 끝나는 경우가 있다.
+    }
+
+    ajax(); // 실행 중인 상태로 다음 코드로 이게 비동기!
+    // alert("그러고 보니") // 1, 이게 먼저 나왔기 때문에 비동기 임을 알 수 있다(순서가 무너져서 비동기)
+
+    setTimeout(()=>{
+        alert(checkData);
+    },1000);  // 1초 뒤에 호출 .., 이렇게 사용하면 안 된다!
+
+    // alert(checkData); // 안 나오는 데이터
+</script>

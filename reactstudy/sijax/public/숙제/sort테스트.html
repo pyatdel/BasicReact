@@ -74,6 +74,51 @@
  <script>
   const tbody = document.querySelector("tbody");
   const yjTNa = document.querySelector("#yjTNa");
+
+  // 나이 th 눌렀을 때
+  let ageToggle = false;
+ function fAge(){
+  let trs = Array.from(document.querySelectorAll("#sumin > tr")); // 배열이 아닌 걸 배열로 바꿈     
+  // alert(trs[0].children[2].innerHTML);
+  trs.sort((a,b) =>{
+    return a.children[2].innerHTML - b.children[2].innerHTML // 여기까진 메모리 상에서 정리한 것
+  })
+
+  if(ageToggle){
+    trs = trs.reverse() // 단순 뒤집기
+  }
+
+  // 화면에 보이게, 위 데이터는 메모리 상에서 정렬된 것
+  for(let i=0; i<trs.length; i++){
+    tbody.appendChild(trs[i]);
+  }
+  ageToggle = !ageToggle; // 클릭 시 마다 true/false를 반복
+ }
+
+ // 이름 th 눌렀을 때
+ let nameToggle = false;
+ function fName(){
+  let trs = Array.from(document.querySelectorAll("#sumin > tr")); // 배열이 아닌 걸 배열로 바꿈     
+  // alert(trs[0].children[2].innerHTML);
+  trs.sort((a,b) =>{
+    if(a.children[1].innerHTML > b.children[1].innerHTML){ // 여기까진 메모리 상에서 정리한 것
+      return 1;
+    } 
+    return -1;
+  })
+
+  if(nameToggle){
+    trs = trs.reverse() // 단순 뒤집기
+  }
+
+  // 화면에 보이게, 위 데이터는 메모리 상에서 정렬된 것
+  for(let i=0; i<trs.length; i++){
+    tbody.appendChild(trs[i]);
+  }
+  nameToggle = !nameToggle; // 클릭 시 마다 true/false를 반복
+ }
+
+
   function fCk(){
     const trs = document.querySelectorAll("#sumin > tr");
     //tbody.appendChild(trs[0]);
