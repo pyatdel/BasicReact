@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 메소드 체이닝
+
+const smObj = {
+    name : "수민"
+}
+
+smObj.aaa = function(){
+    return smObj;
+}
+ 
+smObj.bbb = function(){
+    return smObj;
+}
+smObj.ccc = function(){
+    return "미강 메롱";
+}
+
+// 메소드 체이닝은 완벽 이해 => 하지만 연습은 해야 한다
+alert(smObj.aaa().bbb().ccc().substring(0, 3) + "만세") // smObj
+
+// prototype 같은 class로 생성된 객체의 메소드 공유 영역
+//           메소드를 따로 가지면 더 빠르고 좋겠지만, 메모리가 낭비됨!, 타협!
+</script>

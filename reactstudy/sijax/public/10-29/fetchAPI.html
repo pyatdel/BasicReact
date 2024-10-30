@@ -2,6 +2,36 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 <script>
+    
+
+    let suminStr1 = "수민 왕창 미워";
+    let suminStr2 = `[
+       {"name":"수민","alias":"미워"},
+       {"name":"수민","alias":"미워"}
+    ]`;
+    
+    try {
+        suminDisp(JSON.parse(suminStr1));  // 일반 문자열
+    } catch (error) {
+       //console.log("체크",error);
+       suminDisp(suminStr1);
+    }
+    
+    try {
+        suminDisp(JSON.parse(suminStr2));  // JSON.parse가 가능한 문자열
+    } catch (error) {
+       //console.log("체크",error);
+       suminDisp(suminStr2);
+    }
+    
+    
+    
+    function suminDisp(param){
+        console.log("체크",param);
+    }
+
+
+ 
 // fetch API 결국 xmlhttprequest ajax인데 Promise를 리턴하도록 만들어준 api
 // 그냥 url만 쓰면 method는 기본으로 get으로 정해짐
 // fetch는 조금 불편하게 만들어짐, 설계 모습을 억지로 보여주려한 의도가 불편
@@ -14,6 +44,7 @@
 
 // 오늘의 과제 Cross-Origin의 의미 조사 Origin조사, 구성 3요소
 
+/*
 axios.get("https://news.google.com/rss/search?q=김다미&hl=ko&gl=KR&ceid=KR:ko").then(res=>{
     console.log(res.data);
 }).catch(err=>{
@@ -44,5 +75,5 @@ axios.get("../10-28/data.csv").then(res=>{
         })
 
     })
-
+*/
 </script>

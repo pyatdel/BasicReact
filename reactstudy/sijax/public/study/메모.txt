@@ -1,85 +1,88 @@
-1021_____________
-역산이 가능하므로 이런걸 보안에 쓰는 건 바보같은 행위!!!
-                과거                            최신
-    인코딩함수  escape      encodeURI       encodeURIComponent     
-    디코딩함수  unescape    decodeURI       decodeURIComponent
+//______________________________________1021
+인코딩 함수 진화: escape → encodeURI → encodeURIComponent
+디코딩 함수 진화: unescape → decodeURI → decodeURIComponent
+역산 가능한 인코딩은 보안에 부적절
 
     
 
-1022______________
-직렬화는 왜하나요?
-가볍게 하려고
+//______________________________________1022
+직렬화의 목적: 데이터 경량화
+홈 태그/사용자 입력 처리 중요성
 
-홈 태그/사용자 입력 ==> 정말 잘해야 해
+//______________________________________1023
 
-1023__________________
+session, 스니펫 개념
+ajax의 중요성 강조
+MongoDB에서 splice 객체 활용
+split 메서드의 중요성
+forward vs redirect 차이
+input type="hidden" 활용
 
-session 
-스니펫
+//______________________________________1024
 
-ajax를 못하면 개발로는 힘들다.
+페이지 전환 방식 비교:
 
-몽고 db
-splice
-객체를 만드는 이유
-substring으로 하나씩 찾다보면 너무 힘들기 때문
+Forward: 서버 내부 전환 (URL 변경 없음)
+Redirect: 클라이언트 측 전환 (URL 변경됨)
 
-부업으로 공튀기기..
-splice
 
-split 많이 사용..(꼭 알아야 된다!!)
+input type="hidden" 활용법
 
-//______________________________________
+//______________________________________1025
 
-forward  : 서버에서 넘겨줌(주소표시줄이 안바뀜)
-vs
-redirect : 내가 넘겨줌(주소표시줄에 직접 변경)
+개발자 구분:
 
-input tupe hidden
+Engineer: 설계 중심
+Developer: 개발 중심
+Coder: 코딩 중심
 
-______________________________________
-engineer        developer
+//______________________________________1028    
 
-        coder
-//______________________________________        
+1. JavaScript Array
 
-스스로 작성하는 능력 기르기
-원시타입과 객체타입 잘 알아두기 ex)크기 비교..
+sort 콜백 함수의 중요성
+closest 선택자를 통한 DOM 탐색
 
-array 와 arr의 차이점   
-프로토타입 잘 사용하기 >> 함수 선언과 호출을 구분할 수 있다
-prototype : jsp의 기본
+2. 비동기 통신
 
-//1028______________________________________시작
+AJAX의 중요성 (React/SPA 필수)
+비동기 처리 방식 진화:
 
-콜백 중에, sort가 가장 애매한 부분 >> 배열은 sort만 알면 나머지는 쉬움
-class나 같은 id가 있을 때, cloeset을 많이 사용
-        > 처음만든 id를 찾으러 간다
+전통적 AJAX
+jQuery AJAX
+fetch API
+axios 라이브러리
 
-AJAX(밥줄!) 모르면 리액트 아예 할 수 없음
-안 하는 게 나음!
-SPA(Single Page Application)는 아작스만 씀
 
-스크립트 AJAX
-jQuery AJAX $ajax(...)
-fetch
-axios
 
-Promise (async / await 세트) - 꼭 알아야 한다
+3. HTTP 메서드
 
-메서드 
-get 엽서(내용이 바로 보임)
-post 편지(내용이 바로 안보임)
+GET: 데이터 조회 (URL에 노출)
+POST: 데이터 전송 (Body에 포함)
 
-//1029______________________________________
+4. Promise/async/await
 
-stack 메모리
-Heap 메모리 차이
+비동기 처리의 현대적 방식
+코드 가독성 향상
 
-// KISS => Keep It Simple, Stupid
-// DRY  => Do not Repeat Yourself
+//______________________________________1029
 
-일꾼이 아무리 많아도 비동기를 할 수 없는 경우
->> 일이 하나만 있는 경우(공유자원이 하나) or 보안이 필요한 경우.. 트랜잭션으로 보호
+stack vs heap 메모리 구조
+개발 원칙:
 
-Cross-Origin의 의미 조사 Origin조사, 구성 3요소
+KISS (Keep It Simple, Stupid)
+DRY (Don't Repeat Yourself)
+
+
+비동기 처리의 제한 사항
+Cross-Origin 개념과 구성요소
+
+//______________________________________1030
+
+axios 라이브러리 등장 배경
+async/await의 특징과 제한사항 (함수 생성/호출 필요)
+
+
+async / await는
+항상 함수를 만들고, 호출해야하는 단점이 있다.
+

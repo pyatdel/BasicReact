@@ -1,0 +1,127 @@
+JavaScript 고급 개념 정리
+1. Origin (출처)
+1.1 URL 구성 요소
+Copyhttp://  naver.com  :80
+↓        ↓          ↓
+프로토콜   도메인      포트번호
+1.2 Cross-Origin 리소스 공유 (CORS)
+
+기본적으로 다른 도메인간 AJAX 요청 불가
+예: naver.com에서 kakao.com의 리소스 접근 제한
+해결 방법:
+javascriptCopy// 서버 측 CORS 헤더 설정
+Access-Control-Allow-Origin: *
+
+// 또는 프록시 서버 활용
+// 또는 JSONP 사용 (오래된 방식)
+
+
+2. 전역 스코프와 Window 객체
+2.1 전역 변수와 함수
+javascriptCopy// 전역 변수 선언
+var globalVar = "전역 변수";
+// 같음 ↓
+window.globalVar = "전역 변수";
+
+// 전역 함수 선언
+function globalFunction() {}
+// 같음 ↓
+window.globalFunction = function() {};
+3. 객체 지향 프로그래밍
+3.1 프로토타입 활용
+javascriptCopy// 비효율적인 방법
+function Person(name) {
+    this.name = name;
+    this.sayHello = function() {  // 각 인스턴스마다 메서드 생성
+        console.log(`Hello, ${this.name}`);
+    }
+}
+
+// 효율적인 방법 (프로토타입 활용)
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.sayHello = function() {  // 모든 인스턴스가 공유
+    console.log(`Hello, ${this.name}`);
+}
+4. DOM 조작
+4.1 innerHTML vs jQuery .html()
+javascriptCopy// innerHTML
+element.innerHTML = "<p>새로운 내용</p>";  // 전체 교체
+
+// jQuery
+$("#element").html();                      // 읽기
+$("#element").html("<p>새로운 내용</p>");   // 전체 쓰기
+$("#element").html(function(i, oldHtml) {  // 선택적 수정
+    return oldHtml + "<p>추가 내용</p>";
+});
+5. this 컨텍스트 제어
+5.1 this 바인딩 방법
+javascriptCopyfunction example() {
+    console.log(this);
+}
+
+// 1. call
+example.call(객체, arg1, arg2);
+
+// 2. apply
+example.apply(객체, [arg1, arg2]);
+
+// 3. bind
+const boundFunction = example.bind(객체);
+5.2 화살표 함수와 this
+javascriptCopy// 일반 함수 - this가 동적으로 바인딩
+const obj = {
+    name: "객체",
+    regularMethod: function() {
+        console.log(this.name);  // "객체" 출력
+    }
+};
+
+// 화살표 함수 - 렉시컬 스코프의 this 사용
+const obj2 = {
+    name: "객체",
+    arrowMethod: () => {
+        console.log(this.name);  // undefined (상위 스코프의 this 사용)
+    }
+};
+
+// 중요: 메서드에서 this를 사용해야 할 경우 화살표 함수 사용 금지
+6. 콜백 함수의 현대적 활용
+6.1 콜백 패턴의 진화
+javascriptCopy// 전통적인 jQuery 콜백
+$.ajax({
+    url: "api/data",
+    success: function(response) {
+        // 처리
+    }
+});
+
+// 현대적인 Promise 기반 콜백
+fetch("api/data")
+    .then(response => response.json())
+    .then(data => {
+        // 처리
+    });
+
+// async/await 패턴
+async function getData() {
+    const response = await fetch("api/data");
+    const data = await response.json();
+    // 처리
+}
+6.2 이벤트 리스너에서의 콜백
+javascriptCopy// DOM 이벤트 리스너
+element.addEventListener("click", function(e) {
+    // this는 element를 가리킴
+});
+
+// 화살표 함수 사용시 주의
+element.addEventListener("click", (e) => {
+    // this는 상위 스코프의 this를 가리킴
+});
+
+JavaScript에서는 URL의 Origin 구조를 이해하고 CORS를 처리하며, 
+전역 스코프와 Window 객체를 활용하고, 프로토타입을 통한 객체 지향 프로그래밍을 구현하며, 
+DOM 조작과 this 컨텍스트 관리, 그리고 콜백 함수의 현대적 패턴(Promise, async/await)을 
+통해 효율적인 웹 프로그래밍을 수행합니다.
