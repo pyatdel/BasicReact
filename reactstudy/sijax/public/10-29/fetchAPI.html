@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+<script>
+// fetch API 결국 xmlhttprequest ajax인데 Promise를 리턴하도록 만들어준 api
+// 그냥 url만 쓰면 method는 기본으로 get으로 정해짐
+// fetch는 조금 불편하게 만들어짐, 설계 모습을 억지로 보여주려한 의도가 불편
+// 바로 결과 안 주고, response 객체를 보여 줘
+// get 방식만 하고 있음,  (post/put/delete) => 쓰기 동작이라서 mutation 메소드 는 따로 해야함..
+
+// axios가 fetch보다 편해서, 프론트 프레임워크에선 거의 axios를 사용
+// 그래도 라이브러리라 추가하기 싫어서 fetch를 쓰는 사람도 꽤 된다
+// fetch를 쓰는 사람들은 자신만의 라이브러리로 조금 수정해서 사용
+
+// 오늘의 과제 Cross-Origin의 의미 조사 Origin조사, 구성 3요소
+
+axios.get("https://news.google.com/rss/search?q=김다미&hl=ko&gl=KR&ceid=KR:ko").then(res=>{
+    console.log(res.data);
+}).catch(err=>{
+    console.log("에러", err);
+})
+
+axios.get("data.json").then(res=>{
+    console.log("체크 비웃음",res.data);
+})
+
+axios.get("../10-28/data.csv").then(res=>{
+    console.log("체크 비웃음",res.data);
+})
+
+    // fetch("../10-28/data.csv").then(res => {
+    fetch("data.json").then(res => {
+        // console.log(res);
+        res.text().then(result => { // .text() 랑 json()
+            console.log("체크1", result);
+        })
+
+    })
+
+    fetch("data.json").then(res => {
+        // console.log(res);
+        res.json().then(result => { // JSON.parse
+            console.log("체크2", result);
+        })
+
+    })
+
+</script>

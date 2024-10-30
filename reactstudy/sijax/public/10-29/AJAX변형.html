@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<button onclick="ajax()">누르</button>
+<div id="disp"></div>
+<script>
+const disp = document.querySelector("#disp");
+// 비동기 결과 처리 함수를 밖에 정의
+function suminProcess(pRslt){
+    console.log("퀵아저씨가 가져온 결과",pRslt);
+    disp.innerHTML += pRslt;
+}
+
+// KISS  => Keep It Simple, Stupid 
+// DRY   => Do not Repeat Yourself
+
+// INFP
+
+/* 트렌디한 일반화  매개변수를  1개로 곧 속성을 가진 덩어리 객체롱 
+   opt = {
+      method:"get",
+      url:"값",
+      async:true
+      cf:function(){}
+   }
+*/
+
+// 네임스페이스 용 _, $
+const $ = {};  // 빈 객체 생성
+// 콜백 함수 처리
+$.ajax = function(opt){          // 요따구로 jQuery AJAX가 탄생하게 됨!
+    let xhr = new XMLHttpRequest();
+    xhr.open(opt.method,opt.url,opt.asyc);
+    xhr.onreadystatechange = function(){
+       if(xhr.readyState == 4 && xhr.status == 200){
+        if(opt.dataType == "json"){
+          opt.success(JSON.parse(xhr.responseText))
+        }else {
+          opt.success(xhr.responseText);
+        }
+       }
+    }
+    xhr.send(); // 이벤트 등록을 놓칠 수도 있으니, 먼저 작성하기
+}
+
+// 사용
+$.ajax({
+   method:"get",
+   url:"data.json",
+   async:true,
+   dataType:"json",  // 오해가 많음, 서버가 해주는 거 아님!
+   success:function(rslt){
+      console.log("체크",rslt)
+      disp.innerHTML += `<h1>${rslt[1].name}은 ${rslt[1].age}살 ${rslt[1].alias}로 불림</h1>`;
+   }
+})
+
+
+$.ajax({
+   method:"get",
+   url:"data.html",
+   async:true,
+   dataType:"text",
+   success:function(rslt){
+      console.log("체크",rslt)
+      disp.innerHTML += rslt;
+   }
+})
+
+$.ajax({
+   method:"get",
+   url:"../10-28/data.csv",
+   async:false,
+   dataType:"text",
+   success:function(rslt){
+      console.log("체크",rslt)
+      disp.innerHTML += rslt
+   }
+})
+
+/* 첫번째 일반화, 매개변수를 이용, 매개변수 갯수 변화가 많아서 복잡
+function ajax(method,url,cf){
+    let xhr = new XMLHttpRequest();
+    xhr.open(method,url,true);
+    xhr.onreadystatechange = function(){
+       if(xhr.readyState == 4 && xhr.status == 200){
+           cf(xhr.responseText);
+       }
+    }
+    xhr.send(); // 이벤트 등록을 놓칠 수도 있으니, 먼저 작성하기
+}
+
+ajax("get","data.html",(sumin)=>{
+   console.log("말없음",sumin);
+})
+
+ajax("get","data.csv",function(yjEye){
+    console.log("내눈이",yjEye);
+})
+*/
+
+
+
+
+
+/*
+function ajax(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","data.html",true);
+    xhr.onreadystatechange = function(){
+       if(xhr.readyState == 4 && xhr.status == 200){
+           suminProcess(xhr.responseText);
+       }
+    }
+    xhr.send(); // 이벤트 등록을 놓칠 수도 있으니, 먼저 작성하기
+}
+*/
+
+</script>

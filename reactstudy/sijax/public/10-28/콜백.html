@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    //  controller에서 model에 담아서  nameList 
+    
+    //${nameList}
+    
+    const angelList = ["윤정","진찬","미강"];
+    
+      `\${angelList}`
+    
+    // `(백틱)은 jsp 안에서 쓰면 문제가 됨!, 왜 Spring EL ${}
+    
+    // 선언과 호출을 구분하면 눈이 따라가고, 그 다음부턴 저절로....
+    // let vs const,  { }, 가변, 항시
+    
+    // 윤정 고참 10년차 
+    
+    function yjArr(pArray, pCb){
+       for(let i=0; i< pArray.length ;i++){
+          pCb(pArray[i],i);
+       }
+    }
+    
+    // 진찬 1년차
+    yjArr(["흥","치","뿡"],function(item,index){
+       if(item == "흥"){
+         alert(`${item}  윤정`)
+       }
+       // alert(index + "  " + item);
+    })
+    
+    
+    
+    const aaa = pName=> "메롱2337";
+    //alert(aaa());
+    
+    
+    
+    
+    // aaa = ()=>{ alert("나짱")} // 재할당 시도, 에러발생
+    
+    let jino1 = "지노";
+    jino1 ="승민";
+
+    const jino2 = "지노2";
+    // jino2 = "승민2" // 여기서 에러 발생
+
+    function yuno(){ // 함수 선언
+        alert("나 유노야");
+    }
+
+    const jc = () => {
+        alert("진찬 만찬");
+    }
+
+    function yj(){
+        return "나 윤정짱";
+    }
+
+    // 함수를 호출하면 그 자리에 return 값이 남는다
+
+    function jino(pArg){ // 함수 선언 pArg = yuno
+        // yuno()
+        pArg(yj());
+    }
+
+    // jino(); // 함수 호출(매개변수가 뭐가와도 상관이 없다)
+    // jino(yuno); // => jino("진호 만세") 이런 형태는 (x) -> 항상 함수를 호출해야 한다
+
+    // jino(jc);
+    jino(() =>{
+        alert("진찬 만찬 후루룩")
+
+    });
+
+    jino(() =>{ // 선언
+        let a=3;
+        let b=4;
+        alert(a+b);
+    })
+</script>

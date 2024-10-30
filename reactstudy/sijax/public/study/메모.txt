@@ -46,7 +46,7 @@ engineer        developer
 스스로 작성하는 능력 기르기
 원시타입과 객체타입 잘 알아두기 ex)크기 비교..
 
-array 와 arr의 차이점
+array 와 arr의 차이점   
 프로토타입 잘 사용하기 >> 함수 선언과 호출을 구분할 수 있다
 prototype : jsp의 기본
 
@@ -70,3 +70,16 @@ Promise (async / await 세트) - 꼭 알아야 한다
 메서드 
 get 엽서(내용이 바로 보임)
 post 편지(내용이 바로 안보임)
+
+//1029______________________________________
+
+stack 메모리
+Heap 메모리 차이
+
+// KISS => Keep It Simple, Stupid
+// DRY  => Do not Repeat Yourself
+
+일꾼이 아무리 많아도 비동기를 할 수 없는 경우
+>> 일이 하나만 있는 경우(공유자원이 하나) or 보안이 필요한 경우.. 트랜잭션으로 보호
+
+Cross-Origin의 의미 조사 Origin조사, 구성 3요소

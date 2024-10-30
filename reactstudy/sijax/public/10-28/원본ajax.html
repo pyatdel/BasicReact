@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<button onclic="ajax()">아작스 호출</button>
+<button onclick="ajax()">아작스 호출</button>
 <div id="disp"></div>
 <script>
     // AJAX Asynchronouse JAvascript XML
@@ -14,8 +14,39 @@
     function suminAjax(pData){
         console.log("여기서 처리해요", pData);
         // 숙제, 받은 pData를 <table> 형식으로 출력해보기
+            let lines = pData.split("\n"); // 엔터키로 자르기
+            let ths = lines[0].split(",");
+
+            let tblStr = 
+        `<table border=1>
+           <thead>          
+             <th>${ths[0]}</th><th>${ths[1]}</th><th>${ths[2]}</th>
+          </thead>
+          <tbody>
+        `;
+   
+    for(let i=1; i<lines.length; i++){
+       let tds = lines[i].split(",");
+       tblStr += `
+           <tr>
+             <td>${tds[0]}</td>
+             <td>${tds[1]}</td>
+             <td>${tds[2]}</td>
+           </tr> 
+       `;
     }
 
+    tblStr += `</tbody></table>`;
+
+    disp.innerHTML += tblStr;
+        
+
+
+
+   // 숙제 받은 pData를 <table> 형식으로 출력하시옹!
+ }
+
+     
     let checkData = "";
     function ajax() {
         let xhr = new XMLHttpRequest(); // 퀵서비스 호출 
@@ -32,7 +63,7 @@
             // 관심이 오직 퀵 서비스 아저씨 일 끝난 거에 있음 but, 신뢰가 안감
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) { // 서버에 사인을 요청(신뢰를 위해..)
-                    console.log(xhr.responseText); // 서버에서 가져온 걸 출력
+                    // console.log(xhr.responseText); // 서버에서 가져온 걸 출력
                     disp.innerHTML += `${xhr.responseText} + <br><br>`;
                     
                     checkData = xhr.responseText;
