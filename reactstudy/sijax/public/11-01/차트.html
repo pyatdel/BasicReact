@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>수민 차트</h1>
+    <button onclick="fRandom()">소현 랜덤 데이터</button>
+    <div style="width:400px">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        // new 왼쪽에서 변수로 받으면, 설정 json 형식
+        // update() re-rendering
+        // 데이터 시각화는 통계를 했다는 의미이므로 필수
+        // 차트를 최종 프로젝트에서도 사용해야 한다. 
+        // IT = Information Technology -> data -> information 작업 통계 -> 시각화 
+        
+
+        // 모르면 질문하는 용기
+        let yArr = [1,"흥",{name:"수민",alias:"천재"},["메롱","안메롱",{name:"윤정",alias:"성실"}]];
+
+        // yArr[2] // {name:"수민",alias:"천재"}
+        // yArr[3] // ["메롱","안메롱",{name:"윤정",alias:"성실"}]
+        // yArr[3][2] // {name:"윤정",alias:"성실"}
+
+
+        // 랜덤 배열을 리턴하는 함수
+        function mgArr(){
+            let ranArr = [];
+            // data갯수는 label 갯수에 맞춰줘야 함
+            for(let i=1; i<=6; i++){
+                ranArr.push(Math.round(Math.random()*40) + 20); /* 20~60 */
+            }
+            return ranArr; // 배열 리턴
+        }
+
+        // 랜덤 컬러
+        function fRanColor(){
+            return `rgba(
+              ${Math.floor(Math.random()*256)},
+              ${Math.floor(Math.random()*256)},
+              ${Math.floor(Math.random()*256)},
+              0.5
+            )`;
+        }
+            
+
+        function fRandom() {
+            // smChart.data.labels[3] = "소현";
+            // 값은 바뀌었는데 다시 그리지 않았음(rendering) 자동 rendering, 직접 지시 해야함
+            // smChart.data.datasets[0].data = [22, 29, 13, 15, 12, 13];
+            smChart.data.datasets[0].data = mgArr();
+            smChart.data.datasets[0].backgroundColor = fRanColor();
+
+            let jcDataset = {
+                    type:"line", // 믹스는 오직 bar, line만
+                    label: '진찬 안매출',
+                    data: mgArr(),
+                    borderWidth: 5,
+                    borderColor: fRanColor,
+                    backgroundColor: fRanColor() // fRanColor 함수를 만들어보기, rgb(숫자, 숫자, 숫자) 
+                }
+
+                smChart.data.datasets[1] = jcDataset; // 정해진 자리만 바꿈
+                // smChart.data.datasets.push(jcDataset); // 계속 push로 데이터를 넣음
+
+                smChart.update(); // 다시 그리는 코드
+                setTimeout(fRandom,1000);
+        
+    }
+
+        // 보통 이 상태에서 시작
+        // option 부분은 공부하지 말고, 세팅이니까 구글 검색으로...
+        const ctx = document.querySelector('#myChart');
+
+        // chart.js가 잘 만들어진 이유, 왼쪽에 변수로 받으면, 설정 내용을 받아올 수 있음
+        const smChart = new Chart(ctx, {
+            type: 'bar', // bar, line, pie, doughnut, radar 일반적으로, 항상 생각하기
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{ // 객체는 1개
+                    label: '전년도 수민 매출',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                },
+                ]
+            },
+            options: {
+                indexAxis:'y', // 이것만 넣으면 수평차트가 됨! 기준축 바꾸기
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 설정 옵션 json 구조를 이해해야 함
+        // alert(smChart.data.datasets[0].data[3]);
+        alert(smChart.data.labels[3]);
+    </script>
+</body>
+
+</html>

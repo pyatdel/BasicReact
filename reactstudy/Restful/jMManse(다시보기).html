@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// rest client
+// fetch
+
+// list 가져오기
+fetch("//localhost:3000/idols").then(res => {
+    res.json().then(rslt => {
+        console.log("get list", rslt);
+    })
+})
+
+// idol 검색 get
+let idolId = "I99"
+fetch(`//localhost:3000/idols/${idolId}`).then(res => {
+    res.json().then(rslt => {
+        console.log("get idol 1명", rslt);
+    })
+})
+
+// idol insert(추가) post
+let newIdol = {
+    id: "I999",
+    name: "양소현",
+    age: 32,
+    avatar: "https://avatars.githubusercontent.com/u/jung",
+}
+
+fetch(`//localhost:3000/idols/${newIdol}`, {}).then(res => {
+    res.json().then(rslt => {
+        console.log("get idol 1명", rslt);
+    })
+})
+
+// idol delete
+idolId = "I999"
+fetch(`//localhost:3000/idols/${newIdol}`, {}).then(res => {
+    res.text().then(rslt => {
+        console.log("get idol 1명", rslt);
+    })
+})
+
+// update는 숙제
+/*
+let newIdol = {
+    id: "I999",
+    name: "양소현",
+    age: 32,
+    avatar: "https://avatars.githubusercontent.com/u/jung",
+}
+
+fetch(`//localhost:3000/idols/${newIdol}`, {}).then(res => {
+    res.json().then(rslt => {
+        console.log("get idol 1명", rslt);
+    })
+})
+*/
+</script>

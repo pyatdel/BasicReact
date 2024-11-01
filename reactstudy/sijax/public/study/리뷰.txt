@@ -133,10 +133,83 @@ async function fetchData() {
     console.error(error);
   }
 }
-핵심 포인트 정리
+//______________________________________1031
 
-데이터 타입: 원시타입(복사)과 객체타입(참조) 구분
-React 상태관리: useState와 Props의 이해
-비동기 처리: callback → Promise → async/await 발전
-이벤트 처리: 버블링과 캡처링의 이해
-데이터 저장: localStorage와 JSON 데이터 변환
+크로스오리진(CORS)
+
+3요소: 포트/프로토콜/도메인명
+same-origin 정책으로 인한 Ajax 제약
+서버 우회 방식으로 해결 가능
+
+
+jQuery 핵심
+
+html/on 메서드
+읽기: 매개변수 없음
+전체쓰기: 매개변수 문자열
+선택적쓰기: 콜백함수
+메서드 체이닝
+prototype
+
+
+
+11월 1일 학습내용
+
+REST/RESTful 개념
+
+GET: 조회(select)
+POST: 생성(insert)
+PUT: 수정(update)
+DELETE: 삭제(delete)
+
+
+개발 도구
+
+json-server
+faker-js (더미데이터)
+
+
+fetch API
+
+장점: 라이브러리 불필요
+단점: then 체이닝 필요
+
+
+웹 개발 진화
+CopyREST/RESTful + Ajax 
+=> SPA 
+=> Frontend Framework
+
+//______________________________________1101
+
+웹 개발 발전 흐름
+CopyREST/RESTful + Ajax 
+=> SPA(Single Page Application)
+=> Frontend Framework(React, Vue, Angular)
+
+REST API 메소드
+
+GET: 조회(select) - 리스트/개별
+POST: 생성(insert)
+PUT: 수정(update)
+DELETE: 삭제(delete)
+
+
+개발 도구
+
+json-server: REST API 테스트용
+faker-js: 더미데이터 생성기
+
+자바버전도 존재 (한국어 지원 강화)
+
+
+
+
+fetch API
+
+장점: 별도 라이브러리 불필요
+단점: then 체이닝 필요
+
+javascriptCopyfetch('/api/data')
+  .then(res => res.json())
+  .then(data => console.log(data))

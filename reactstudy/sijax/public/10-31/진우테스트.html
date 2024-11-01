@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div id="jcDisp">
+   <table border=1>
+       <thead>
+           <th>순번</th>
+           <th>타이틀</th>
+           <th>발행일</th>
+       </thead>
+       <tbody id="suminTb">
+           <tr id="suminTr" style="display:none;">
+               <td></td>
+               <td></td>
+               <td></td>
+           </tr>
+       </tbody>
+   </table>
+</div>
+
+<!-- 막혔을 때는, 서버 프로그램을 직접 넣어서 해야한다.. -->  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+<script>
+// 이게 있어야 바꿀 수 있다
+const jcDisp = document.querySelector("#jcDisp")  
+const suminTb = document.querySelector("#suminTb") 
+const suminTr = document.querySelector("#suminTr")      
+
+let schWord = '진찬';
+// `https://api.allorigins.win/get?url=${encodeURIComponent('https://news.google.com/rss/search?q=김다미&hl=ko&gl=KR&ceid=KR:ko')}`
+let gURL = encodeURIComponent(`https://news.google.com/rss/search?q=${schWord}&hl=ko&gl=KR&ceid=KR:ko`);
+
+axios.get(`https://api.allorigins.win/get?url=${gURL}`)
+     .then((res)=>{
+       let xmlCont = res.data.contents;
+       let suminJson = x2js.xml_str2json(xmlCont);
+       let mgNews = suminJson.rss.channel.item;  // 실제 뉴스가 담긴 배열
+       
+       console.log("결과:", res.data.contents);
+       // Create x2j instance
+       console.log("체크", suminJson);
+
+       for(let i=0; i<mgNews.length; i++){
+           let news = mgNews[i];
+           tblStr += `
+           <tr>
+               <td>${i + 1}</td>
+               <td><a href="">${news.title}</a></td>
+               <td>${news.pubDate}</td>
+           </tr>
+           `;
+       }
+
+       let ujungTr = suminTr.cloneNode(true); // 깊은 복제(매개변수 true)
+       ujungTr.children[0].innerHTML = i+1;
+       ujungTr.children[1].innerHTML = title;
+       ujungTr.children[2].innerHTML = `<a href="${news.link}" target="_blank">title`;
+       ujungTr.style.display="table-row";
+       // suminTb.appendChild(ujungTr);
+
+       for(let i=0; i<mgNews.length; i++){
+           let news = mgNews[i];
+           console.log(news.title);
+           console.log(news.link);
+           console.log(news.pubDate);
+       }
+
+       let tblStr = `
+           <table border=1>
+           <thead>
+               <th>순번</th>
+               <th>타이틀</th>
+               <th>발행일</th>
+           </thead>
+           <tbody>
+       `;
+
+       let news, title;
+       for(let i=0; i<mgNews.length; i++){
+          news = mgNews[i];
+          title = news.title.length > 10 ? 
+                   news.title.substring(0,10) + "..." : news.title;  
+          
+          tblStr += `
+             <tr>
+               <td>${i+1}</td>
+               <td><a href="${news.link}" target="_blank">${title}</a></td>
+               <td>${news.pubDate}</td>
+             </tr>
+          `;
+       }
+
+       tblStr += `</tbody></table>`;
+       jcDisp.innerHTML = tblStr;
+
+       // 테스트 뉴스 전체를 순번 매겨서 테이블 형태로 출력하기
+       // 타이틀은 10자 이상일 경우 10자만 나오고, ...이 붙도록
+     })
+</script>

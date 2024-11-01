@@ -1,0 +1,215 @@
+스크롤 관련 속성
+
+javascriptCopy// 스크롤 위치 계산
+const isBottomReached = () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const clientHeight = document.documentElement.clientHeight;
+  const scrollHeight = document.documentElement.scrollHeight;
+  
+  return scrollTop + clientHeight >= scrollHeight;
+}
+
+// 무한 스크롤 예제
+window.addEventListener('scroll', () => {
+  if (isBottomReached()) {
+    loadMoreContent();
+  }
+});
+
+핵심 CSS 속성
+
+cssCopy/* display */
+.container {
+  display: flex;          /* Flexbox */
+  display: grid;          /* Grid */
+  display: block;         /* 기본 블록 */
+  display: inline-block;  /* 인라인 블록 */
+  display: none;          /* 숨김 */
+}
+
+/* z-index */
+.overlay {
+  position: absolute;
+  z-index: 100;    /* 더 높은 레이어 */
+}
+.background {
+  z-index: 1;      /* 더 낮은 레이어 */
+}
+
+/* transform */
+.element {
+  transform: translate(100px, 100px);  /* 이동 */
+  transform: rotate(45deg);            /* 회전 */
+  transform: scale(1.5);               /* 크기 조절 */
+  transform: skew(10deg);              /* 기울이기 */
+}
+
+/* position */
+.relative {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* overflow */
+.slider-container {
+  overflow: hidden;  /* 슬라이더에서 자주 사용 */
+}
+
+.scroll-container {
+  overflow: auto;    /* 스크롤바 표시 */
+}
+
+슬라이더 예제
+
+cssCopy.slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.slide {
+  flex: 0 0 100%;
+}
+javascriptCopy// 기본적인 슬라이더 구현
+class Slider {
+  constructor() {
+    this.currentIndex = 0;
+    this.slider = document.querySelector('.slider');
+  }
+
+  slide(direction) {
+    if (direction === 'next') {
+      this.currentIndex++;
+    } else {
+      this.currentIndex--;
+    }
+    this.slider.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+  }
+}
+
+데이터 시각화
+
+A. Chart.js 예제
+javascriptCopyimport Chart from 'chart.js/auto';
+
+// 기본 라인 차트
+new Chart(document.getElementById('myChart'), {
+  type: 'line',
+  data: {
+    labels: ['1월', '2월', '3월', '4월', '5월'],
+    datasets: [{
+      label: '월별 매출',
+      data: [65, 59, 80, 81, 56],
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  }
+});
+
+// 막대 차트
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow'],
+    datasets: [{
+      label: '선호도',
+      data: [12, 19, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
+      ]
+    }]
+  }
+});
+B. D3.js 예제
+javascriptCopyimport * as d3 from 'd3';
+
+// 기본 막대 차트
+const svg = d3.select('#chart')
+  .append('svg')
+  .attr('width', width)
+  .attr('height', height);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter()
+  .append('rect')
+  .attr('x', (d, i) => i * 70)
+  .attr('y', d => height - d * 10)
+  .attr('width', 65)
+  .attr('height', d => d * 10)
+  .attr('fill', 'steelblue');
+
+AG-Grid 예제
+
+javascriptCopy// AG-Grid 기본 설정
+const gridOptions = {
+  columnDefs: [
+    { field: 'name', filter: true },
+    { field: 'age', filter: 'agNumberColumnFilter' },
+    { field: 'country', filter: true }
+  ],
+  rowData: [
+    { name: '홍길동', age: 25, country: '한국' },
+    { name: 'John Doe', age: 30, country: 'USA' }
+  ],
+  // 기본 기능 활성화
+  pagination: true,
+  paginationPageSize: 10,
+  sortable: true,
+  filter: true
+};
+
+// 그리드 초기화
+new agGrid.Grid(document.querySelector('#myGrid'), gridOptions);
+
+// 데이터 필터링 예제
+const filterParams = {
+  age: {
+    type: 'greaterThan',
+    filter: 25
+  }
+};
+gridOptions.api.setFilterModel(filterParams);
+
+데이터 통계 및 시각화 Best Practices
+
+javascriptCopy// 데이터 집계 함수 예제
+const calculateStats = (data) => {
+  return {
+    average: data.reduce((a, b) => a + b) / data.length,
+    max: Math.max(...data),
+    min: Math.min(...data),
+    sum: data.reduce((a, b) => a + b),
+    count: data.length
+  };
+};
+
+// 차트 반응형 처리
+window.addEventListener('resize', () => {
+  chart.resize();
+});
+
+// 데이터 포맷팅
+const formatCurrency = new Intl.NumberFormat('ko-KR', {
+  style: 'currency',
+  currency: 'KRW'
+});

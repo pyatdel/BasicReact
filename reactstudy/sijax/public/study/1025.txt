@@ -1,0 +1,118 @@
+웹 아키텍처 구조
+
+CopyClient <===> Server
+           ↓
+Controller → Service → DAO → DB
+
+각 계층의 역할과 책임
+
+A. Controller (웹 계층)
+
+클라이언트 요청 처리
+URL 매핑 및 라우팅
+응답 데이터 반환
+
+javaCopy@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    @Autowired
+    private UserService userService;
+    
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.findUser(id);
+    }
+}
+B. Service (비즈니스 계층)
+
+핵심 비즈니스 로직 처리
+트랜잭션 관리
+
+javaCopy@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserDao userDao;
+    
+    @Transactional
+    public User createUser(UserDTO dto) {
+        // 비즈니스 로직 처리
+        validateUserData(dto);
+        User user = convertToEntity(dto);
+        return userDao.save(user);
+    }
+}
+C. DAO (데이터 접근 계층)
+
+데이터베이스 연동
+SQL 실행
+
+javaCopy@Repository
+public class UserDaoImpl implements UserDao {
+    @Autowired
+    private SqlSession sqlSession;
+    
+    public User findById(Long id) {
+        return sqlSession.selectOne("User.findById", id);
+    }
+}
+
+Collection Framework
+
+A. List Interface
+
+순서가 있는 데이터 구조
+중복 허용
+
+javaCopy// ArrayList 예제
+List<String> names = new ArrayList<>();
+names.add("김철수");
+names.add("김철수");  // 중복 가능
+System.out.println(names.get(0));
+
+// LinkedList 예제
+List<String> linkedNames = new LinkedList<>();
+linkedNames.add("박영희");
+B. Set Interface
+
+순서 없는 데이터 구조
+중복 불가
+
+javaCopySet<String> colors = new HashSet<>();
+colors.add("빨강");
+colors.add("빨강");  // 중복 값은 저장되지 않음
+
+// Iterator 사용
+Iterator<String> it = colors.iterator();
+while(it.hasNext()) {
+    System.out.println(it.next());
+}
+C. Map Interface
+
+키-값 쌍으로 데이터 저장
+키는 중복 불가, 값은 중복 가능
+
+javaCopyMap<String, String> student = new HashMap<>();
+student.put("name", "김철수");
+student.put("grade", "A");
+System.out.println(student.get("name"));
+
+Interface 사용 이유
+
+javaCopy// 인터페이스 정의
+public interface UserService {
+    User findUser(Long id);
+    void createUser(User user);
+}
+
+// 구현체
+public class UserServiceImpl implements UserService {
+    @Override
+    public User findUser(Long id) {
+        // 구현 내용
+    }
+    
+    @Override
+    public void createUser(User user) {
+        // 구현 내용
+    }
+}

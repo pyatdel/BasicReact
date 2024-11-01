@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #suminFriend {
+            border: 5px groove pink;
+            margin-bottom: 5px;
+            display: none;
+            /* 처음에는 감춰놓기, 계속 감출 예정 */
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="fadd()">친구추가+</button>
+    <div id="suminFriend">
+        이름 : <input type="text" value="">
+        나이 : <input type="text" value="">
+        전화번호 : <input type="text" value="">
+        <button onclick="fremove(this)">x</button>
+    </div>
+    <div id="flist">
+    </div>
+    <script>
+        const suminFriend = document.querySelector("#suminFriend");
+        const flist = document.querySelector("#flist");
+
+        function fremove(pBtn) {
+            // pBtn.closest("div").remove();
+            pBtn.parentElement.remove(); // 위랑 같은 표현
+            flist.removeChild(pBtn)
+        }
+
+        function fadd() {
+            let cloneF = suminFriend.cloneNode(true);
+            cloneF.style.display = "block";
+            flist.appendChild(cloneF);
+        }
+
+    </script>
+</body>
+
+</html>
