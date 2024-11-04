@@ -1,7 +1,6 @@
 Ajax (Asynchronous JavaScript and XML)
 javascript
 
-Copy
 // 기본적인 Ajax 요청 예제
 fetch('/api/users')
   .then(response => response.json())
@@ -22,7 +21,7 @@ fetch('/api/users', {
 JSON 변환 도구
 javascript
 
-Copy
+
 // Jackson (Java)
 @RestController
 public class UserController {
@@ -40,7 +39,7 @@ User user = gson.fromJson(jsonString, User.class);
 REST API 메소드
 javascript
 
-Copy
+
 // GET - 조회
 fetch('/api/users/1')
 
@@ -63,7 +62,7 @@ fetch('/api/users/1', {
 form과 Ajax 비교
 html
 
-Copy
+
 <!-- Traditional Form (GET/POST only) -->
 <form method="POST" action="/api/users">
   <input type="text" name="username">
@@ -84,7 +83,7 @@ const submitData = async () => {
 Node.js 프로젝트 설정
 bash
 
-Copy
+
 # 프로젝트 초기화
 npm init -y
 
@@ -95,9 +94,9 @@ npm install -D @faker-js/faker
 import { faker } from '@faker-js/faker';
 const randomName = faker.person.fullName();
 REST API 주요 특징
-javascript
 
-Copy
+
+
 // GET 요청 (body 없음)
 fetch('/api/users')
 
@@ -114,9 +113,9 @@ fetch('/api/users/1', {
   })
 })
 객체 복제
-javascript
 
-Copy
+
+
 // 얕은 복제
 const original = { name: 'John', age: 25 };
 const shallowCopy = { ...original };
@@ -132,9 +131,9 @@ public class User implements Cloneable {
     }
 }
 DOM 조작
-javascript
 
-Copy
+
+
 // 부모-자식 관계 탐색
 const parent = document.querySelector('.parent');
 const children = parent.children;
@@ -144,17 +143,15 @@ const firstChild = parent.firstElementChild;
 const specific = document.querySelector('#specific');
 const all = document.querySelectorAll('.items');
 템플릿 문자열
-javascript
 
-Copy
+
 const name = '홍길동';
 const age = 25;
 const message = `안녕하세요, ${name}님! 
 당신의 나이는 ${age}세 입니다.`;
 직렬화와 역직렬화
-java
 
-Copy
+
 // Java 객체 → JSON (직렬화)
 ObjectMapper mapper = new ObjectMapper();
 String json = mapper.writeValueAsString(userObject);

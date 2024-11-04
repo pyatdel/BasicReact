@@ -213,3 +213,19 @@ fetch API
 javascriptCopyfetch('/api/data')
   .then(res => res.json())
   .then(data => console.log(data))
+
+  //______________________________________1104
+
+무한스크롤 -> window / div  
+          scrollTop, clientHeight, scrollHeight
+          setTimeout(() =>{
+            window.scrollTo(x,y)
+          }, 30)
+
+chart.js -> new 왼쪽에 변수 값을 주어서 받으면, 설정 옵션 객체에 접근/쓰기가 가능
+          -> update() 리 - 렌더링, 값을 주면, 다시 그려야 함
+
+aggrid -> 요즘 시대가 원하는 grid, 성능이 best
+
+==> 너무 미루면, 머리에 흔적도 남지 않으니.. 하루빨리 공부하기
+    그래야 질문이 나옴, 아예 모르면 질문도 할 수 없음

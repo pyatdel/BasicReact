@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let suminHuk = true;
+
+        suminHuk || alert("수민"); // 출력 (o)
+        suminHuk && alert("유정"); // 출력 (x), 이건 많이 사용하니까, 잘 알아두기
+
+        // 제발 콜백 함수 눈이 따라갈 수 있을 정도로..
+        function useCallback(pCb){
+            return pCb;
+            /*
+                pCb = (pName)=>{
+                alert(`${pName}은 아이돌!`)}
+            */
+        }
+
+            const sumin3 = useCallback((pName)=>{
+                alert(`${pName}은 아이돌`);
+            })
+
+        sumin3("수민");
+
+        function fYunJung(){
+            console.log("윤정 체크",this);
+        }
+        // fYunJung.call({name:"자스천재 미강"}); // this에 들어가는 값
+        // fYunJung.call({name:"자스민 소현"}); // this에 들어가는 값
+        // fYunJung.call({name:"완전 수민"}); // this에 들어가는 값
+    // fYunJung.bind({name:"자스천재 미강"}); // 이렇게 하면 실행이 안된다
+    // fYunJung.bind({name:"자스민 소현"}); // 이렇게 하면 실행이 안된다
+    // fYunJung.bind({name:"완전 수민"}); // 이렇게 하면 실행이 안된다
+    const yjF = fYunJung.bind({name:"자스천재 미강"})(); // bind가 들어간 함수를 호출할 수도 있다.
+    yjF();
+    fYunJung.bind({name:"자스민 소현"})(); // 가로를 붙일 수 없는 상황에 사용하면 좋다
+    fYunJung.bind({name:"완전 수민"})(); // 가로를 붙일 수 없는 상황에 사용하면 좋다
+    </script>
+    
+</body>
+</html>

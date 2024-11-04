@@ -7,7 +7,7 @@ React 개발 환경 설정부터 기본적인 컴포넌트 생성까지 단계�
 Vite로 React 프로젝트 생성 및 설정
 bash
 
-Copy
+
 # 프로젝트 생성
 npm create vite@latest my-react-app
 # 이후 React와 JavaScript/TypeScript 선택
@@ -24,7 +24,7 @@ npm run dev
 rfce: React Function Component Export
 jsx
 
-Copy
+
 // Example.jsx
 import React from 'react'
 
@@ -38,7 +38,7 @@ export default Example
 rac: React Arrow Component
 jsx
 
-Copy
+
 // Example.jsx
 import React from 'react'
 
@@ -50,7 +50,7 @@ export const Example = () => {
 실습 예제로 배우는 React 기초
 jsx
 
-Copy
+
 // UserProfile.jsx
 import React from 'react'
 
@@ -79,7 +79,7 @@ function App() {
 주요 React 속성(Props) 및 개념
 jsx
 
-Copy
+
 // 1. 기본적인 props 전달
 <Button text="클릭하세요" />
 
@@ -112,7 +112,7 @@ function Counter() {
 간단한 프로젝트 예제: ToDo 리스트
 jsx
 
-Copy
+
 import { useState } from 'react'
 
 function TodoList() {

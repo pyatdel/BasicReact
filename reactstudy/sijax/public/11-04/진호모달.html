@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+   #wrapper {
+     border: 5px groove gold;
+     width:70%;
+     height:50vh; 
+     margin:20px auto;
+   }
+   #jhModal {
+     position: fixed; /* 무조건 화면 전체를 막아야 함 */
+     width:100%;
+     height:100%;
+     left:0; top:0;
+     background-color: rgba(0,255,0, 0.7);
+     display: none;  /* 처음엔 아예 없는 것 처럼 */
+     z-index: 1;     /* 나중에 모달이 여러개 일 때 보이는 순서를 이걸로 조정 */
+   }
+   #jcCont {
+      width: 50%;
+      margin: 20px auto;
+      background-color: blueviolet; 
+   }
+</style>
+</head>
+<body>
+  <!-- 모달은 별도로 만드는 게 유리-->
+  <div id="jhModal" onclick="closeModal()">
+    <div id="jcCont">
+        <h1>진찬</h1>
+        <h2>진 찬찬찬</h2>
+        <button onclick="closeModal()">누르면 닫혀</button>
+    </div>
+  </div>
+  
+  <div id="wrapper">
+      <h1>지영 만만세</h1>
+      <button onclick="showOpen()">열려라 지영</button>
+  </div>
+<script>
+    sessionStorage.setItem("merong","승민");
+
+  //window.open 
+
+   const jhModal = document.querySelector("#jhModal");
+   function showOpen(){
+      jhModal.style.display="block";
+   }
+   function closeModal(){
+      jhModal.style.display="none";
+      //window.open("https://ddit.or.kr","sohyun","width=400,height=500,left=-300,top=-300");  // 범용 사이트는 사용자 허가가 필요해서 잘 안씀
+   }
+</script>
+</body>
+</html>
