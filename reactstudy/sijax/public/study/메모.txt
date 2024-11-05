@@ -86,3 +86,27 @@ async/await의 특징과 제한사항 (함수 생성/호출 필요)
 async / await는
 항상 함수를 만들고, 호출해야하는 단점이 있다.
 
+//______________________________________1105
+
+==========자바스크립트 중요하다고 생각하는 거 ==========
+
+원시타입(복사) vs 참조타입(별명) 구분!!!
+함수(매개변수 리턴) ,call / apply / bind(고급스러워보인다)
+비동기
+// 브라우져에서 돌아가기 때문에
+DOM 제어 중요 =>
+    서치 : querySelector(), querySelectorAll()
+    생성 : createElement()
+    문서에 붙이는 거 : append() / appendChild() => 이동
+    삭제 : remove() / remove Child()
+    * : closest("가장 가까운 거")
+    css 선택자 /display / position / overflow / z-index / tranform
+    레이아웃 : flex / grid
+
+
+prototype? 나중에 해도 된다, localStorage / sessionStorage
+
+AJAX - 원본 /jquery AJAX / fetch / axios    
+fetch / axios 둘 중 하나는 꼭 알아야 한다 + promise + async / await
+
+callback 눈에 익힙시다!!(함수의 매개변수로 함수가 넘어갔을 때)
