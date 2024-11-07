@@ -1,7 +1,7 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { createRoot } from 'react-dom/client';
+import App2 from './App2.jsx';
 
 const smRoot = createRoot(document.getElementById('root')); 
 smRoot.render(
-    <App />
+    <App2 />
 )

@@ -1,0 +1,95 @@
+1. Props의 데이터 흐름
+
+// 항상 부모 -> 자식으로 단방향 데이터 흐름
+// Parent Component
+function Parent() {
+  return <Child message="안녕!" />; 
+}
+
+// Child Component
+function Child(props) {
+  return <div>{props.message}</div>;
+}
+
+2. HOC (High Order Component)
+
+// 컴포넌트를 받아서 새로운 컴포넌트를 반환하는 함수
+const withLogger = (WrappedComponent) => {
+  return function(props) {
+    console.log('컴포넌트 렌더링:', props);
+    return <WrappedComponent {...props} />;
+  }
+}
+
+3. React Hooks
+
+// useState 사용 예시
+function Counter() {
+  const [count, setCount] = useState(0);  // 초기값 0
+  
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      카운트: {count}
+    </button>
+  );
+}
+
+4. 비교 연산자
+
+// Loose Compare (자동 형변환)
+console.log("5" == 5);    // true
+console.log("5" != 5);    // false
+
+// Strict Compare (형변환 없음)
+console.log("5" === 5);   // false
+console.log("5" !== 5);   // true
+
+5. Children Props
+
+// Parent Component
+function Container({ children }) {
+  return (
+    <div className="container">
+      {children}  {/* 여기에 자식 요소들이 들어감 */}
+    </div>
+  );
+}
+
+// 사용 예시
+<Container>
+  <h1>제목</h1>
+  <p>내용</p>
+</Container>
+
+6. 배열 메서드 (map/filter)
+
+// map 예시
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+// [2, 4, 6]
+
+// filter 예시
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+// [2, 4]
+
+// React에서 활용 예시
+function TodoList({ todos }) {
+  return (
+    <ul>
+      {todos
+        .filter(todo => !todo.completed)  // 완료되지 않은 할 일만 필터링
+        .map(todo => (                    // 각 할 일을 리스트 아이템으로 변환
+          <li key={todo.id}>{todo.text}</li>
+        ))
+      }
+    </ul>
+  );
+}
+
+요약
+1. Props는 항상 위에서 아래로 흐름 (부모 → 자식)
+2. Hooks는 use로 시작하며, React의 편리한 기능을 제공
+3. ===와 !==를 사용하는 것이 더 안전함
+4. children은 컴포넌트 안의 내용을 전달하는 특별한 prop
+5. map과 filter는 실전에서 매우 자주 사용되니 꼭 익숙해져야 함

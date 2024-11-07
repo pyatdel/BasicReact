@@ -9,14 +9,15 @@ function Friend({tel,name}) {
 
   return (
     <div style={{border:"5px groove pink"}}>
-        <h1>{name}</h1>
-        <h2 style={{color:"gray"}}>{tel}</h2>
+       <h1>{name}</h1>
+       <h2 style={{color:"gray"}}>{tel}</h2>
     </div>
   )
 }
 export default Friend
 
 // 1개 파일에 멀티 컴포넌트
+/* 
 export function JinChan({answer}){
   return(
     <>
@@ -24,4 +25,5 @@ export function JinChan({answer}){
     <h2>해찬{answer}</h2>
     </>
   )
-}
+} 
+*/

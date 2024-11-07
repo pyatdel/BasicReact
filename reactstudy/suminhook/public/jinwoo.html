@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    let sh = ["소현"];
+    sh.push("승민");
+    let gj = sh;
+
+    let sumin6 = [...gj,"수민"]; // new Array(), 달라졌다는 것을 알려면, 새로운 객체를 추가해야 한다
+    sh.push("수민");
+
+    // alert(sh === sh); 
+    // alert(sh === gj); 
+    alert(sh === sumin6); // 내용은 같지만 다른 박스, 차가 2대 같은 기종으로
+
+    let uhoArr = ["윤호","광제","완희"];
+
+    let uho2 = uhoArr.filter(uho => uho !="광제");
+
+    alert(uho2);
+
+</script>

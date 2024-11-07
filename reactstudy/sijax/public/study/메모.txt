@@ -110,3 +110,25 @@ AJAX - 원본 /jquery AJAX / fetch / axios
 fetch / axios 둘 중 하나는 꼭 알아야 한다 + promise + async / await
 
 callback 눈에 익힙시다!!(함수의 매개변수로 함수가 넘어갔을 때)
+
+//______________________________________1106
+
+component -> 재사용 -> 프론트 프렐임워크 핵심개념 ->  DOM 제어(개발자가 직접 안해도 되게)
+-> 변수명, 객체속성 숫자로 시작 못한다. 객체에 숫자 속성 배열식 접근법
+- 화살표 함수 매개변수 1개일 때 () 생략 가능 , return문만 있을 때 {return 남길 꺼}
+- 멀티 컴포넌트, jsx 파일 1개에 여러 개 함수 컴포넌트가 와도 됨
+    ㄴ 같은 파일 안에 있는 건 그냥 바로 쓸 수 있고, 다른 파일에 있는 건 import
+- return JSX 안에는 {반복문 같은 건 쓰지 않는다 || && ?}
+- map / filter , foreach , every, some
+
+//______________________________________1107
+
+props 부모 -> 자식
+	hoc(High Order Component)
+
+부모 -> 자식 단방향으로 props이동
+hock -> react에서 제공하는 편리한 함수, use로 시작
+useState -> [변수, set변수] = useState(초기값), setXXX로 값을 바꾸면 re-rendering
+==, != (자동 형변환 발생, loose compare), !==, === (형변환 없음, stric compare)  
+children => 여는 태그 / 닫는 태그 사이에 있는 걸 모든 걸(짜슥) 의미
+map/filter => 콜백 잘 쓰려면 시간이 필요해(어렵다고 제껴두면... 끝)
