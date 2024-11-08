@@ -3,7 +3,7 @@ import Counter from "./Counter"
 import Sumin6 from "./Sumin6"
 import Counter2 from "./Counter2"
 import Sumin8 from "./Sumin8"
-import Sumin9 from "./sumin9"
+import Sumin9 from "./Sumin9"
 
 function App() {
 

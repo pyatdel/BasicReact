@@ -44,31 +44,39 @@ function Sumin6() {
      //friends = newFrds;
   }
 
-  const twoFive = (pname) =>{
-    alert(`다시 ${pname}`)
-    const newFrds  = friends.filter( uho => uho.name != pname);
+  // 테스트 나이 순으로 정렬해보기
+  const agesort = ()=>{
+    const newFrds  = friends.filter( uho => uho.age)
+                            .sort((a,b)=>a.age - b.age)
+
+    setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!    
+  }
+
+  const over25 = () =>{
+    alert(`다시 `)
+    const newFrds  = friends.filter( uho => uho.age >= 25)
     setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!
     //friends = newFrds;
  }
 
- const twoEight = (pname) =>{
-  alert(`할까요 ${pname}`)
-  const newFrds  = friends.filter( uho => uho.name != pname);
+ const under28 = () =>{
+  alert(`할까요 `)
+  const newFrds  = friends.filter( uho => uho.age < 28)
   setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!
   //friends = newFrds;
 }
   return (
     <div>
        <button onClick={addFriend}>insert coin</button>
-       <button onClick={twoFive}>나이가 25세 이상만 가져오기</button>
-       <button onClick={twoEight}>나이가 28세 미만만 가져오기</button>
+       <button onClick={over25}>나이가 25세 이상만 가져오기</button>
+       <button onClick={under28}>나이가 28세 미만만 가져오기</button>
+       <button onClick={agesort}>나이순으로 정렬해보기</button>
+       {/* <button onClick={()=>{under28()}}>나이가 28세 미만만 가져오기</button> */}
        { friends.length == 0 &&  <h1>continue</h1>}
        { friends.length != 0 &&  
             friends.map(frd => 
                <Friend
                   minusFriend={minusFriend}
-                  twoFive={twoFive}
-                  twoEight={twoEight}
                   // removeFriend={removeFriend}
                   key={frd.name} 
                   name={frd.name} 
