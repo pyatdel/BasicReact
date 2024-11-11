@@ -65,6 +65,17 @@ function Sumin6() {
   setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!
   //friends = newFrds;
 }
+
+const upperMe = (age)=>{
+  const newFrds  = friends.filter( uho => uho.age >= age  )
+  setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!    
+}
+
+const lowerMe = (age)=>{
+  const newFrds  = friends.filter( uho => uho.age <= age)
+  setFriends(newFrds);  // setXXX로 상태변수 값을 바꾸면 다시 그리게 됨!    
+}
+
   return (
     <div>
        <button onClick={addFriend}>insert coin</button>
@@ -76,6 +87,8 @@ function Sumin6() {
        { friends.length != 0 &&  
             friends.map(frd => 
                <Friend
+               upperMe = {upperMe}
+               lowerMe = {lowerMe}
                   minusFriend={minusFriend}
                   // removeFriend={removeFriend}
                   key={frd.name} 

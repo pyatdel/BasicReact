@@ -2,7 +2,7 @@ import React from 'react'
 
 const avtURL = "https://api.dicebear.com/9.x/adventurer/svg?seed="
 
-function Friend({name,age,merit,avt,minusFriend}) {
+function Friend({name,age,merit,avt,minusFriend, upperMe, lowerMe}) {
   const imgURL = `${avtURL}${avt}`
 
   // 헷갈리지 않도록, 일부러 화살표 함수를 사용. 
@@ -12,7 +12,13 @@ function Friend({name,age,merit,avt,minusFriend}) {
      minusFriend(name);  // 호출
   }
 
-  
+  const jcUpper = () => {
+    upperMe(age)
+  }
+
+  const jcLower = () => {
+    lowerMe(age)
+  }
 
   return (
     <div style={{border:"5px groove gold"}}>
@@ -21,8 +27,8 @@ function Friend({name,age,merit,avt,minusFriend}) {
       <h3>{age}</h3>
       <h3>{merit}</h3>
       <button onClick={jcRich}>딜리트</button>
-      <button >나보다 나이 많은 사람들</button>
-      <button >나보다 나이가 같거나 적은 사람들</button>
+      <button onClick={jcUpper}>나포함 내 나이 이상인 사람들</button>
+      <button onClick={jcLower}>나포함 내 나이 이하인 사람들</button>
     </div>
   )
 }
