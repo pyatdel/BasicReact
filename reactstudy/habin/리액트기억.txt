@@ -1,0 +1,13 @@
+Hook => 리액트 제공하는 편리한 프로그램
+    useState, useDispatcher, useEffect
+Node
+nvm
+npm
+Props 컴포넌트 속성값 전달
+
+Component 기반 => JSX(javaScript Systac eXtension)
+    => 부모는 1개만 있어야 한다. <></>
+VirtualDom (가상DOM json) => 이거 가지고 어디가 바뀌었는지 비교해서
+                            바꾼 부분만 재빨리 다시 그리기(re-rendering)
+Dockerize 도커화 (node 이미지) 도커 이미지로 만들기
+
