@@ -1,0 +1,104 @@
+1. 주요 컴포넌트 구조
+App.js (메인 애플리케이션)
+
+// 주요 라우트 구성
+<Routes>
+  <Route path="/" element={<WhiteSumin />} />        // 홈 - 모래고래
+  <Route path="/hiphap" element={<SkyMigang />} />   // 물고래
+  <Route path="/manchan" element={<BlueChan />} />   // 불고래
+  <Route path="/friends" element={<Friends />}>       // 나무고래
+    <Route path="/friends/:fid" element={<OnlyOne />} /> // 중첩 라우트
+  </Route>
+  <Route path="*" element={<NotFound />} />          // 404 페이지
+</Routes>
+
+
+2. 주요 기능 설명
+
+1) 기본 네비게이션 (NaviBar)
+
+Link 컴포넌트를 사용하여 기본 페이지 이동 구현
+각각의 고래 페이지로 이동하는 링크 제공
+
+<Link to={"/"}>불고래</Link>
+<Link to={"/hiphap"}>물고래</Link>
+<Link to={"/manchan"}>풀고래</Link>
+<Link to={"/friends"}>나무고래</Link>
+
+
+2) 중첩 라우팅 (Friends 컴포넌트)
+
+NavLink를 사용하여 활성화 상태에 따른 스타일링 구현
+Outlet을 통해 중첩된 컴포넌트 표시
+
+function Friends() {
+  // 활성화된 링크 스타일 설정
+  const gjStyle = ({isActive}) => {
+    return isActive ? {
+      textDecoration: "none",
+      fontWeight: "bold"
+    } : {
+      textDecoration: "underline",
+      fontWeight: "normal"
+    }
+  }
+}
+
+
+3) URL 파라미터 처리
+
+useParams 사용 (OnlyOne 컴포넌트)
+
+function OnlyOne() {
+  const params = useParams()
+  // URL의 :fid 파라미터 값을 가져옴
+  return <h3>고래 {params.fid}</h3>
+}
+
+
+useSearchParams 사용 (SkyMigang 컴포넌트)
+
+function SkyMigang() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  
+  // URL 쿼리 파라미터 설정 예시
+  const handleJuso = () => {
+    setSearchParams({
+      name: "곶게",
+      age: 1,
+      alias: "살",
+      answer: "가득"
+    })
+  }
+}
+
+
+3. 주요 개념 정리
+URL 파라미터의 두 가지 방식
+
+Path 파라미터 (/friends/:fid)
+
+useParams() 훅으로 접근
+주소의 일부로 사용됨
+예: /friends/1, /friends/2
+
+
+쿼리 파라미터 (?name=value)
+
+useSearchParams() 훅으로 접근
+URL 끝에 ? 뒤에 키=값 형태로 추가
+예: /hiphap?name=곶게&age=1
+
+
+
+스타일링 특징
+
+NavLink는 현재 활성화된 링크에 대한 스타일을 지정할 수 있음
+isActive 속성을 통해 현재 선택된 링크 구분
+조건부 스타일링으로 사용자 경험 향상
+
+라우팅 구조의 특징
+
+중첩 라우팅으로 컴포넌트 계층 구조 구현
+Outlet을 통한 자식 라우트 렌더링
+404 페이지 처리 ("*" 경로 사용)
