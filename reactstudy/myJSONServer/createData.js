@@ -14,7 +14,7 @@ const myDB = {};
 myDB.idols = [];
 Object.preventExtensions(myDB); // 확장불가
 
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i <= 100; i++) {
   let idol = {
     id: faker.helpers.fromRegExp("I[0-9][0-9]"),
     name: `${person.lastName()}${person.firstName()}`,
@@ -23,5 +23,7 @@ for (let i = 1; i <= 20; i++) {
   };
   myDB.idols.push(idol);
 }
+
+
 
 fs.writeFile(fileName, JSON.stringify(myDB));

@@ -1,0 +1,119 @@
+44pg 삼항연산자
+45pg
+
+프로젝트 생성 및 시작
+# Vite를 사용한 프로젝트 생성
+npm create vite@latest
+
+# 프로젝트 시작
+npm run dev  # 'dev'는 run 없이 실행 불가
+npm start    # 'start'는 run 생략 가능
+npm test     # 'test'는 run 생략 가능
+
+주요 특징
+
+
+시작 파일: index.html
+public 폴더: 자동으로 홈 디렉토리로 설정됨
+HMR(Hot Module Reload): 코드 변경 시 자동 새로고침
+
+
+유용한 단축키
+
+
+Alt + Shift + O: 코드 정리
+Ctrl + Space: 자동 설치 제안
+
+
+React 기본 문법
+
+// 스타일 적용 방법
+const styles = {
+  container: {
+    backgroundColor: 'blue',
+    padding: '20px'
+  }
+}
+
+// 객체 속성 접근 방법
+const obj = {};
+obj["key"] = "value";  // 권장되는 방식
+// obj.0000 = "값"     // 잘못된 방식
+
+// 컴포넌트 예시
+function MyComponent(props) {
+  return (
+    <div style={styles.container}>
+      {props.title}
+    </div>
+  );
+}
+
+실습 예제
+
+// App.jsx
+import { useState } from 'react'
+
+function App() {
+  // 상품 목록 배열
+  const [items] = useState([
+    { id: 1, name: "상품1", price: 1000 },
+    { id: 2, name: "상품2", price: 2000 },
+    { id: 3, name: "상품3", price: 3000 }
+  ]);
+
+  return (
+    <div>
+      <h1>상품 목록</h1>
+      {/* map을 사용한 리스트 렌더링 */}
+      <ul>
+        {items.map(item => (
+          <ItemComponent 
+            key={item.id}
+            name={item.name}
+            price={item.price}
+          />
+        ))}
+      </ul>
+      
+      {/* filter를 사용한 필터링 */}
+      <h2>2000원 이상 상품</h2>
+      {items
+        .filter(item => item.price >= 2000)
+        .map(item => (
+          <ItemComponent 
+            key={item.id}
+            name={item.name}
+            price={item.price}
+          />
+        ))}
+    </div>
+  )
+}
+
+// 상품 컴포넌트
+function ItemComponent({ name, price }) {
+  return (
+    <li>
+      {name}: {price}원
+    </li>
+  )
+}
+
+export default App
+
+주요 포인트:
+
+컴포넌트는 반드시 대문자로 시작
+props는 읽기 전용
+map과 filter는 React에서 매우 중요한 배열 메서드
+객체 다루기에서 대괄호 표기법 [obj["key"]]의 활용
+컴포넌트의 재사용성을 고려한 설계
+
+실습 제안:
+
+새 프로젝트 생성
+간단한 컴포넌트 만들기
+컴포넌트에 props 전달해보기
+배열 데이터를 만들고 map으로 렌더링
+filter를 사용해 조건부 렌더링 구현

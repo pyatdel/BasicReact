@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<script>
+    //===== 1. 객체 구조분해를 활용한 함수 파라미터 =====
+    function fYuno({age, name}){
+        alert(name + " " + age)
+    }
+
+    fYuno({
+        name:"유노",
+        age:20
+    })
+
+    //===== 2. 전개 연산자(...) 예제 =====
+    // 전개 연산자 그저 배열을 문법적으로 간략하게 표현(자바스크립트는 항상 짧은 표현을 찾아 발전)
+    // 프론트 프레임워크에서 새배열(배열복사), 새객체(객체복사) 
+    /*
+    // 2.1 배열에서의 전개 연산자
+    let testArr = ["흥","치","피"];
+    let testArr2 = ["수민",...testArr];
+    // 새 배열 new Array(), push와 값은 같지만, 의미는 전혀 다름
+    // console.log(testArr);
+    // console.log(testArr2);
+    
+    // 2.2 객체에서의 전개 연산자
+    let sumin66 = {
+        name:"수민",
+        alias:"흥"
+    }
+    let sumin667 = {
+        skill:"흥",
+        ...sumin66,
+        alias:"조아 조아"
+    };  // 새 객체 생성, 기존객체 값 복사 그리고 새값 추가
+    console.log(sumin66);
+    console.log(sumin667);
+    */
+
+    //===== 3. Rest 파라미터와 배열 구조분해 =====
+    let yuno = ["윤","호","메","롱"];
+
+    // Rest 파라미터 예제
+    function yuno6(sm, dd, ...merong){
+        console.log("체킁",merong);
+    }
+    
+    // 배열 구조분해와 rest 요소
+    //let [,,...me] = ["윤","호","메","롱"]
+
+    //===== 4. 객체와 배열의 구조분해 심화 =====
+    let sumin6 = {
+        name:"수민",
+        speech:"말 없음 걸어가야 함"
+    }
+
+    // 객체 배열 예제
+    const member = [
+        {name:"수민",alias:"흥"},
+        {name:"유정",alias:"치"},
+        {name:"윤정",alias:"피"},
+    ];
+
+    // 배열 구조분해 예제
+    /*
+    const [sumin,yujung,yunjung] = member;
+    console.log(sumin);
+    console.log(yujung);
+    console.log(yunjung);
+    */
+
+    // 객체 구조분해 - 기존 방식
+    //const speech = sumin6.speech;
+    
+    // 객체 구조분해 - 현대적 방식
+    const {speech} = sumin6;
+    //alert(speech);
+
+    // 주석 처리된 실행 코드들
+    //console.log("체크",me);
+    //alert(me); //?
+    //yuno6("aa","bb","cc","dd");
+    //console.log(...yuno);
+</script>

@@ -1,0 +1,34 @@
+Redux의 핵심 개념
+ - Store : 전체 앱의 상태를 하나의 객체로 관리
+ - Slice : 특정 도메인의 상태와 로직을 관리하는 단위
+ - Action : 상태 변경을 위한 정보를 담은 객체
+ - Reducer : Action을 받아 실제 상태를 변경하는 함수
+ - Dispatch : Action을 Store로 보내는 메서드
+
+
+1. Context API 예제:
+
+
+App.js에서 ThemeContext를 생성하고 theme 상태와 setTheme 함수를 제공
+Button과 Panel 컴포넌트에서 useContext로 theme 상태를 사용
+Form 컴포넌트를 통해 다크모드 토글 기능 구현
+
+
+2. Redux Toolkit  (counterSlice):
+
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { value: 0 },
+  reducers: {
+    inc: (state) => { state.value += 1 },
+    dec: (state) => { state.value -= 1 },
+    incByVal: (state, action) => { state.value += action.payload }
+  }
+});
+
+
+주요 차이점:
+
+1. Context API는 간단한 전역 상태 관리에 적합
+2. Redux는 복잡한 상태 로직과 액션 처리가 필요할 때 유용
+3. Context는 Provider-Consumer 패턴, Redux는 Action-Reducer 패턴 사용

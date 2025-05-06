@@ -1,0 +1,147 @@
+Suminhook -> Sumin6
+
+230pg hook은 최상위 레벨에서만 호출해야 한다, 반복문, if문 안에 들어가도 안된다
+
+msp
+micro service pattern 
+map -> 서버 따로
+db -> 서버 따로
+
+namespace
+이름을 거꾸로 써서, 중복을 방지한다
+
+@Target(value={TYPE})
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters={@Filter(type=CUSTOM, classes={TypeExcludeFilter.class}), @Filter(type=CUSTOM, classes={AutoConfigurationExcludeFilter.class})})
+@Retention(value=RUNTIME)
+@Documented
+@Inherited
+
+html, css 는 웹에서 보면 정적 파일이다
+
+pom.xml 파일이 있어야 spring 기억하자!
+
+
+!! 전자정부 프레임워크는 굳이 이클립스를 사용하지 않아도,
+권장 사항만 지키면 된다
+
+log4j >> slgf
+로그 설정(레벨 설정)
+
+logging.level.org.springframework.http = dubug
+
+
+오픈소스 - 크로미움 -> google이 chrome으로 바꿔서 발표했다
+
+jpa, mybatis -- 자바파일과 sql 파일을 분리(mapper interface, sql interface)
+
+인터페이스 : 공업규격
+ ex)스마트폰 - 전화 가능, 어플 설치 가능 ...  
+
+회사에서의 장점?
+지시에 유리 -> 업무적으로 좋음
+interface가 있어야 sql을 class를 이용해서 옮길 수  있다. = dao
+
+
+잡 내용 -- 노트북은 데스크탑보다 작업 성능이 안좋다
+ ㄴ 그래서 개발자용, 서버용이 따로 나온다
+
+
+
+apache
+common db 2
+
+hikari
+
+connection tool 
+ - 로그인 등의 요청을 보내는데, 시간이 너무 많이 걸려서,
+   미리 만들어 둔 도구
+
+
+mybatis.configuration.map-underscore-to-camel-case=true 
+mybatis.configuration.jdbc-type-for-null=varchar
+mybatis.type-aliases-package=com.sumin.just.vo
+mybatis.mapper-locations=classpath:mybatis/mapper/*-Mapper.xml
+
+java의 null을 오라클은 모르고, 
+오라클의 null을 java는 모른다.
+
+crud의 개발 순서
+db -> mapper(보통은 이게 먼저) -> service -> controller
+
+VO <----> table
+
+VO값을 private로 주는 이유?
+ -public을 주면, idolAge = 1000으로 하는 걸 막을 수 없다.
+
+setAge(int age){
+if(age > 100){
+}} 이런 식으로 막기 위함(유효성 체크)
+
+@Data
+@Getter // 권장
+@Setter // 권장
+@ToString // 디버깅용 
+
+table 만들었고, VO를 만들었다면 다음은? (mapper)
+
+mapper를 만들 때, 메소드 5개를 만들어야 한다
+하나 읽기, 여러 개 읽기, 생성, 수정, 삭제
+
+interface의 리턴 타입을 보고 판단
+
+mapper까지 만들었다면? 한 번 테스트를 해보면 좋다
+
+private는 습관적으로 자주 사용해보자
+
+assertEquals(기대치, 실제값);
+
+
+
+package com.sumin.just.mapper;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.sumin.just.vo.IdolVO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j			// Simple log4j
+@SpringBootTest // 이걸 해주면 알아서 Juit5 연결시켜준다. 아주 편리@@@
+public class IdolMapperTest {
+	
+	@Autowired
+	private IdolMapper idolMapper; // private는 습관적으로 자주 사용해보자
+	
+	
+	// insert 테스트
+	@Test // Junit 메뉴가 나온다
+	public void insIdolTest() {
+		
+		int sum = 0;
+		IdolVO idol = new IdolVO();
+		for(int i=1; i<=10; i++) {
+			idol = new IdolVO();
+			idol.setIdolName("수민"+i+"돌");
+			idol.setIdolAge(20+i);
+			idol.setIdolSajin("사진 없대"+i);
+			sum += idolMapper.insIdol(idol);
+			
+		}
+		
+		// idolMapper.insIdol(null)
+		assertEquals(10, sum);
+	}
+
+}
+이것 테스트 한 후, 
+
+==>  Preparing: INSERT INTO tb_idol ( idol_id, idol_name, idol_age, idol_sajin ) VALUES ( sumin_seq.nextval, ?, ?, ? )
+2024-11-08T17:17:02.173+09:00 DEBUG 22624 --- [just] [           main] c.sumin.just.mapper.IdolMapper.insIdol   : ==> Parameters: 수민10돌(String), 30(Integer), 사진 없대10(String)
+2024-11-08T17:17:02.175+09:00 DEBUG 22624 --- [just] [           main] c.sumin.just.mapper.IdolMapper.insIdol   : <==    Updates: 1
+결과값을 copy MyBatis Statement 하고, sqldeveloper에 넣으면.. insert문이 나온다(insert문 사용이 편리)

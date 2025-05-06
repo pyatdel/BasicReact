@@ -1,0 +1,92 @@
+1. React 파트
+
+// 1. 상태 관리와 배열 업데이트
+const [friends, setFriends] = useState([]);
+
+// 배열에 새 값 추가하는 올바른 방식
+const addFriend = (newFriend) => {
+    const newFrds = [newFriend, ...friends];  // 새로운 배열 생성 (불변성 유지)
+    setFriends(newFrds);  // 상태 업데이트로 re-rendering 발생
+}
+
+Hooks 정리
+
+1. useState
+
+// 간단한 상태 관리에 적합
+const [count, setCount] = useState(0);
+
+
+2. useReducer
+
+// 복잡한 상태 로직에 적합
+const [state, dispatch] = useReducer(reducer, initialState);
+
+
+3. useEffect
+
+// 외부 데이터 동기화 (AJAX 등)에 사용
+// 3가지 주요 케이스:
+// 1. 의존성 배열 없음 - 매 렌더링마다 실행
+useEffect(() => {
+    // 코드
+});
+
+// 2. 빈 의존성 배열 - 최초 마운트시만 실행
+useEffect(() => {
+    // 코드
+}, []);
+
+// 3. 의존성 배열에 값 존재 - 해당 값 변경시 실행
+useEffect(() => {
+    // 코드
+}, [dependency]);
+
+4. useRef
+
+// current 속성을 통해 값 접근
+const inputRef = useRef(null);
+// inputRef.current로 접근
+
+
+코딩 스타일 가이드
+
+세미콜론 사용은 일관성 있게 (전부 다 쓰거나, 전부 다 쓰지 않거나)
+const 사용 권장 (React의 불변성 원칙 준수)
+컴포넌트 재사용성 고려
+
+2. Spring/Java 파트
+
+빌드 도구
+
+Gradle과 Maven
+
+프로젝트 구조 자동화
+의존성 관리
+빌드 프로세스 관리
+
+- JAR (Java Archive)
+- WAR (Web Archive)
+- EAR (Enterprise Archive)
+
+Spring Boot는 주로 JAR 사용 
+(내장 Tomcat 때문)
+
+Java 패키지 명명 규칙
+- 도메인명을 거꾸로 사용 (예: com.company.project)
+- 충돌 방지를 위한 관행
+
+개발 환경 설정
+SpringToolSuite4.ini 설정:
+-javaagent:C:\e7e\boot\sts426\lombok.jar
+
+// Lombok 사용을 위한 설정
+
+
+주요 포인트
+
+1. React 컴포넌트는 재사용성을 위해 작은 단위로 분리
+2. 상태 관리는 useState와 useReducer를 상황에 맞게 사용
+3. useEffect는 사이드 이펙트 처리에 핵심
+4. Spring/Java 환경은 빌드 도구를 통한 자동화가 중요
+5. 프로젝트 구조와 명명 규칙은 표준을 따르는 것이 중요

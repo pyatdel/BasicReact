@@ -1,0 +1,42 @@
+  /* 일단 ajax 되는지 부터 검증!
+  axios.get("http://localhost:8272/mg/idols").then(resp=>{
+     console.log("리스트 체크:",resp.data);
+  })
+  */
+  /*
+  axios.get("http://localhost:8272/mg/idols/7").then(resp=>{
+    console.log("7번 찾기",resp.data);
+  })
+  */
+
+  /* insert도 문제 없음  
+  const testIdol = {
+     mgId:0,   // 서버쪽에서 처리하기 때문에 의미없이 구분용으로 0사용
+     mgName:"미강",
+     mgAge:21,
+     mgSajin:"https://api.dicebear.com/9.x/lorelei/svg?seed=양미강"
+  }
+
+  axios.post("http://localhost:8272/mg/idols",testIdol).then(resp=>{
+    console.log("잘 들어갔으면 1",resp.data)
+  })
+  */
+
+  /* 수정  
+  const updateIdol = {
+     //mgId:5,   // 서버쪽에서 처리하기 때문에 의미없이 구분용으로 0사용
+     mgName:"왕미강",
+     mgAge:12,
+     mgSajin:"https://api.dicebear.com/9.x/lorelei/svg?seed=미강"
+  }
+
+  axios.put("http://localhost:8272/mg/idols/5",updateIdol).then(resp=>{
+    console.log("잘 수정되었으면 1",resp.data)
+  })
+  */
+
+  /*
+  axios.delete("http://localhost:8272/mg/idols/5").then(resp=>{
+     console.log("잘 지워졌으면 1",resp.data);
+  }) 
+  */

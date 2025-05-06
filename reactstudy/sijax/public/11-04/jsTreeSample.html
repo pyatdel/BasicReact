@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JSTREE 샘플</title>
+    
+    <!-- ===== 1. 필수 라이브러리 로드 ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.15/jstree.min.js"></script>
+    <link rel="stylesheet" href="//static.jstree.com/3.3.15/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.15/themes/default/style.min.css" />
+</head>
+
+<body>
+    <!-- ===== 2. HTML 구조 ===== -->
+    <div id="jstree"></div>
+    <input type="text" id="schName" value="">
+    <button onclick="fSch()">탐색</button>
+
+    <script>
+        //===== 3. 검색 기능 =====
+        function fSch() {
+            console.log("검색");
+            // jstree 인스턴스의 search 메소드 호출
+            $('#jstree').jstree(true).search($("#schName").val());
+        }
+
+        //===== 4. jsTree 기본 설정 =====
+        // 노드의 중요 속성: original, icon, state
+        // 루트 노드는 parent를 #으로 설정
+        $.jstree.defaults.core.themes.variant = "large";
+
+        //===== 5. jsTree 초기화 - 기본 방식 =====
+        // 기본 초기화 (잘 사용하지 않음)
+        // $("#jstree").jstree();   // 새 인스턴스 생성
+        // $('#tree2').jstree(true); // 기존 인스턴스 가져오기
+
+        //===== 6. jsTree 초기화 - 권장 방식 =====
+        $("#jstree").jstree({
+            "plugins": ["search"],  // 검색 플러그인 활성화
+            'core': {
+                'data': {
+                    "url": function (node) {
+                        return "alldata.json"; // AJAX 요청 URL
+                    }
+                    /* AJAX 요청 시 전송할 데이터 설정
+                    "data": function (node) {
+                        return { 'id': node.id }
+                    }
+                    */
+                },
+                "check_callback": true,  // 노드 조작 콜백 허용
+            }
+        });
+
+        //===== 7. jsTree 초기화 - 상세 제어 방식 =====
+        /* 
+        $("#jstree").jstree({
+            "plugins": ["search"],
+            'core': {
+                'data': function (obj, cb) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("get", "alldata.json", true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            cb.call(obj, JSON.parse(xhr.responseText));
+                            $('#jstree').jstree(true)
+                        }
+                    }
+                    xhr.send();
+                },
+                "check_callback": true
+            }
+        });
+        */
+
+        //===== 8. 이벤트 핸들러 =====
+        // 노드 변경 이벤트
+        $('#jstree').on("changed.jstree", function (e, data) {
+            console.log(data.selected);
+        });
+
+        // 노드 열기 이벤트
+        let isAdded = false;
+        $('#jstree').on("open_node.jstree", function (e, data) {
+            console.log("open되었을땡", data.node);
+
+            // 특정 노드(S22)가 열렸을 때 새 노드 추가
+            if (!isAdded && data.node.id == 'S22') {
+                let myNode = {
+                    "text": "육수민",
+                    "id": "J09",
+                    "whoisshe": "actress",
+                    "isBestFriend": "Y",
+                    "icon": "glyphicon glyphicon-user"
+                };
+                let myCallBack = () => {
+                    alert("추가했어용");
+                }
+                $('#jstree').jstree(true).create_node('S22', myNode, "last", myCallBack);
+                isAdded = true;
+            }
+        });
+
+        // 노드 선택 이벤트
+        $('#jstree').on("select_node.jstree", function (e, data) {
+            console.log("select했을땡", data.node);
+        });
+
+        //===== 9. jsTree API 호출 방식 =====
+        /* 버전 호환성을 위한 다양한 API 호출 방식 (첫 번째 방식 권장)
+          $('#jstree').jstree(true).select_node('child_node_1');
+          $('#jstree').jstree('select_node', 'child_node_1');
+          $.jstree.reference('#jstree').select_node('child_node_1');
+        */
+    </script>
+</body>
+</html>

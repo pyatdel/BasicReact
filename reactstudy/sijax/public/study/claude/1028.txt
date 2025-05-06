@@ -1,0 +1,111 @@
+웹 개발의 핵심 개념과 JavaScript 기초
+1. 클라이언트 사이드 저장의 한계
+1.1 HTML 파일 기반 게시판
+    웹서버  -- 사용자1 (브라우저)
+      	  |-- 사용자2 (브라우저)
+          |-- 사용자3 (브라우저)
+
+각 사용자의 데이터가 개별 브라우저에 저장
+데이터 공유 불가능
+적합한 용도: 개인용 일기장, TodoList
+이러한 방식을 PWA(Progressive Web App)라고 함
+URL 제약: GET 방식만 가능 (POST 방식 불가)
+
+1.2 장점
+
+서버 부하 최소화
+빠른 응답 속도
+오프라인 작동 가능
+
+2. AJAX (Asynchronous JavaScript And XML)
+2.1 핵심 특징
+
+비동기 통신 방식
+XML에서 JSON으로 진화
+Worker 시스템
+
+Worker 2명: 동시 작업 가능
+Worker 1명: 순차적 작업
+
+
+
+2.2 역사
+
+초기: 비동기 신뢰성 부족으로 동기 방식 선호
+2004년: MS와 Google의 지원으로 비동기 방식 대중화
+
+3. 데이터 처리 방식
+3.1 CSV 파일
+
+특징: 콤마(,)로 데이터 구분
+활용: 빅데이터 시대에 재조명
+장점: 단순한 구조, 높은 호환성
+
+3.2 파일 경로
+
+상대경로: 같은 폴더일 경우 './' 생략 가능
+정적 파일: 서버 즉시 응답 (예: data.csv)
+
+4. JavaScript 변수 시스템
+4.1 데이터 타입
+javascriptCopy// 원시 타입
+let number = 272;      // 숫자
+let text = "만찬";     // 문자열
+
+// 참조 타입
+let func = function(){}; // 함수
+4.2 변수 선언 방식
+javascriptCopy// let - 가변성
+let score = 100;
+score = 90; // 가능
+
+// const - 불변성
+const config = {
+    name: "미강",
+    alias: "자스천재"
+};
+config.name = "양미강";  // 속성 변경 가능
+config = {};           // 에러 발생
+4.3 타입별 특징
+
+원시 타입
+
+직접적인 값 저장
+불변성
+값의 복사
+
+
+참조 타입
+
+메모리 주소 참조
+내부 속성 변경 가능
+참조의 복사
+
+
+
+5. 모범 사례
+5.1 데이터 저장
+javascriptCopy// localStorage 사용 예시
+localStorage.setItem('user', JSON.stringify({
+    name: "미강",
+    role: "개발자"
+}));
+
+// 데이터 읽기
+const user = JSON.parse(localStorage.getItem('user'));
+5.2 비동기 처리
+javascriptCopy// 현대적인 비동기 처리
+async function getData() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('데이터 로딩 실패:', error);
+    }
+}
+
+웹 개발에서는 클라이언트 사이드 저장의 한계를 극복하기 위해 
+AJAX를 통한 비동기 통신을 사용하고, JavaScript의 원시/참조 타입과 
+let/const 변수를 활용하며, localStorage와 async/await를 통해 
+데이터를 효율적으로 처리합니다.
